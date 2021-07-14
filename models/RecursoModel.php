@@ -4,20 +4,34 @@ require_once 'Model.php';
 
 class RecursoModel extends Model{
 
-    public function guardar(string $nombre_recurso)
-    {
-        $sql = 'insert into recurso(descripcion_recurso) values(:nombre_recurso)';
-        $stm = $this->db->prepare($sql);
-        $stm->bindParam(':nombre_recurso', $nombre_recurso);
-        $stm->execute();
-        echo ($stm->rowCount() > 0) ? 'ok' : 'error' ;
-    }
+    protected $table = 'recurso';
+
+    protected $keyName = 'id_recurso';
 
 }
 
 $recursoModel = new RecursoModel();
-if(isset($_POST['action'])&& isset($_POST['descripcion']))
+
+if(isset($_POST['action']))
 {
     $action = $_POST['action'];
-    $recursoModel->$action($_POST['descripcion']);
+    switch ($action)
+    {
+        case 'guardar':
+            $recursoModel->$action(['descripcion_recurso' => $_POST['descripcion'] ]);
+            break;
+            
+        case 'find':
+            $recursoModel->$action($_POST['id_recurso']);
+            break;
+
+        case 'actualizar':
+            $recursoModel->$action(['descripcion_recurso' => $_POST['descripcion']], $_POST['id_recurso']);
+            break;
+
+        case 'eliminar':
+            $recursoModel->$action($_POST['id_recurso']);
+            break;
+    }
+    
 }

@@ -1,11 +1,11 @@
 function agregar()
 {
-    let descripcion = $("#de_recurso").val();
+    let descripcion = $("#de_categoria_indicador").val();
     let form_registro = new FormData;
     form_registro.append('descripcion', descripcion);
     form_registro.append('action', 'guardar');
 
-    fetch('../models/RecursoModel.php', {
+    fetch('../models/CategoriaIndicadorModel.php', {
 
         method: 'post', 
         body: form_registro
@@ -14,30 +14,30 @@ function agregar()
     .then( res => {  
         if(res=='ok')
         {
-            $.notification.show('success','Recurso creado correctamente!');
+            $.notification.show('success','Categoría indicador creada correctamente!');
             $("#modal-default").modal("hide");
             setTimeout('document.location.reload()',1000);
         }
         else
-            $.notification.show('error','Error al crear el recurso!');
+            $.notification.show('error','Error al crear la categoría indicador');
     })
 }
 
 function getData(id)
 {
     let form_registro = new FormData;
-    form_registro.append('id_recurso', id);
+    form_registro.append('id_categoria_indicador', id);
     form_registro.append('action', 'find');
 
-    fetch('../models/RecursoModel.php', {
+    fetch('../models/CategoriaIndicadorModel.php', {
 
         method: 'post', 
         body: form_registro
 
     }).then( res => res.json())
     .then( res => {  
-            $("#id_recurso_update").val(res[0].id_recurso);
-            $("#de_recurso").val(res[0].descripcion_recurso);
+            $("#id_categoria_indicador_update").val(res[0].id_categoria_indicador);
+            $("#de_categoria_indicador").val(res[0].descripcion_categoria_indicador);
             document.getElementById('leyendaAgregar').style.display = 'none';
             document.getElementById('leyendaEditar').style.display = 'block';
             document.getElementById('buttonGuardar').style.display = 'none';
@@ -48,14 +48,14 @@ function getData(id)
 
 function actualizar()
 {
-    let id_recurso = $("#id_recurso_update").val();
-    let descripcion = $("#de_recurso").val();
+    let id_categoria_indicador = $("#id_categoria_indicador_update").val();
+    let descripcion = $("#de_categoria_indicador").val();
     let form_registro = new FormData;
     form_registro.append('descripcion', descripcion);
-    form_registro.append('id_recurso', id_recurso);
+    form_registro.append('id_categoria_indicador', id_categoria_indicador);
     form_registro.append('action', 'actualizar');
 
-    fetch('../models/RecursoModel.php', {
+    fetch('../models/CategoriaIndicadorModel.php', {
 
         method: 'post', 
         body: form_registro
@@ -64,25 +64,25 @@ function actualizar()
     .then( res => {  
         if(res=='ok')
         {
-            $.notification.show('success','Recurso actualizado correctamente!');
+            $.notification.show('success','Categoría indicador actualizado correctamente!');
             $("#modal-default").modal("hide");
             setTimeout('document.location.reload()',1000);
         }
         else
-            $.notification.show('error','Error al actualizar el recurso!');
+            $.notification.show('error','Error al actualizar la categoría indicador');
     })
 }
 
-function eliminar(id_recurso)
+function eliminar(id_categoria_indicador)
 {
-    var conf = confirm("Desea eliminar este Recurso?");
+    var conf = confirm("Desea eliminar esta categoría de indicador?");
     if (conf == true)
     {
         let form_registro = new FormData;
-        form_registro.append('id_recurso', id_recurso);
+        form_registro.append('id_categoria_indicador', id_categoria_indicador);
         form_registro.append('action', 'eliminar');
 
-        fetch('../models/RecursoModel.php', {
+        fetch('../models/CategoriaIndicadorModel.php', {
 
             method: 'post', 
             body: form_registro
@@ -91,12 +91,12 @@ function eliminar(id_recurso)
         .then( res => {  
             if(res=='ok')
             {
-                $.notification.show('success','Recurso eliminado correctamente!');
+                $.notification.show('success','Categoría indicador eliminada correctamente!');
                 $("#modal-default").modal("hide");
                 setTimeout('document.location.reload()',1000);
             }
             else
-                $.notification.show('error','Error al eliminar el recurso!');
+                $.notification.show('error','Error al eliminar la categoría indicador');
         })
     }
 }
@@ -106,5 +106,5 @@ $("#modal-default").on('hidden.bs.modal', function () {
     document.getElementById('leyendaEditar').style.display = 'none';
     document.getElementById('buttonGuardar').style.display = 'block';
     document.getElementById('buttonActualizar').style.display = 'none';
-    $("#de_recurso").val('');
+    $("#de_categoria_indicador").val('');
 });

@@ -1,11 +1,11 @@
 function agregar()
 {
-    let descripcion = $("#de_recurso").val();
+    let descripcion = $("#de_frecuencia").val();
     let form_registro = new FormData;
     form_registro.append('descripcion', descripcion);
     form_registro.append('action', 'guardar');
 
-    fetch('../models/RecursoModel.php', {
+    fetch('../models/FrecuenciaModel.php', {
 
         method: 'post', 
         body: form_registro
@@ -14,30 +14,30 @@ function agregar()
     .then( res => {  
         if(res=='ok')
         {
-            $.notification.show('success','Recurso creado correctamente!');
+            $.notification.show('success','Frecuencia creada correctamente!');
             $("#modal-default").modal("hide");
             setTimeout('document.location.reload()',1000);
         }
         else
-            $.notification.show('error','Error al crear el recurso!');
+            $.notification.show('error','Error al crear la frecuencia!');
     })
 }
 
 function getData(id)
 {
     let form_registro = new FormData;
-    form_registro.append('id_recurso', id);
+    form_registro.append('id_frecuencia', id);
     form_registro.append('action', 'find');
 
-    fetch('../models/RecursoModel.php', {
+    fetch('../models/FrecuenciaModel.php', {
 
         method: 'post', 
         body: form_registro
 
     }).then( res => res.json())
     .then( res => {  
-            $("#id_recurso_update").val(res[0].id_recurso);
-            $("#de_recurso").val(res[0].descripcion_recurso);
+            $("#id_frecuencia_update").val(res[0].id_frecuencia);
+            $("#de_frecuencia").val(res[0].descripcion_frecuencia);
             document.getElementById('leyendaAgregar').style.display = 'none';
             document.getElementById('leyendaEditar').style.display = 'block';
             document.getElementById('buttonGuardar').style.display = 'none';
@@ -48,14 +48,14 @@ function getData(id)
 
 function actualizar()
 {
-    let id_recurso = $("#id_recurso_update").val();
-    let descripcion = $("#de_recurso").val();
+    let id_frecuencia = $("#id_frecuencia_update").val();
+    let descripcion = $("#de_frecuencia").val();
     let form_registro = new FormData;
     form_registro.append('descripcion', descripcion);
-    form_registro.append('id_recurso', id_recurso);
+    form_registro.append('id_frecuencia', id_frecuencia);
     form_registro.append('action', 'actualizar');
 
-    fetch('../models/RecursoModel.php', {
+    fetch('../models/FrecuenciaModel.php', {
 
         method: 'post', 
         body: form_registro
@@ -64,25 +64,25 @@ function actualizar()
     .then( res => {  
         if(res=='ok')
         {
-            $.notification.show('success','Recurso actualizado correctamente!');
+            $.notification.show('success','Frecuencia actualizada correctamente!');
             $("#modal-default").modal("hide");
             setTimeout('document.location.reload()',1000);
         }
         else
-            $.notification.show('error','Error al actualizar el recurso!');
+            $.notification.show('error','Error al actualizar la frecuencia!');
     })
 }
 
-function eliminar(id_recurso)
+function eliminar(id_frecuencia)
 {
-    var conf = confirm("Desea eliminar este Recurso?");
+    var conf = confirm("Desea eliminar esta frecuencia?");
     if (conf == true)
     {
         let form_registro = new FormData;
-        form_registro.append('id_recurso', id_recurso);
+        form_registro.append('id_frecuencia', id_frecuencia);
         form_registro.append('action', 'eliminar');
 
-        fetch('../models/RecursoModel.php', {
+        fetch('../models/FrecuenciaModel.php', {
 
             method: 'post', 
             body: form_registro
@@ -91,12 +91,12 @@ function eliminar(id_recurso)
         .then( res => {  
             if(res=='ok')
             {
-                $.notification.show('success','Recurso eliminado correctamente!');
+                $.notification.show('success','Frecuencia eliminado correctamente!');
                 $("#modal-default").modal("hide");
                 setTimeout('document.location.reload()',1000);
             }
             else
-                $.notification.show('error','Error al eliminar el recurso!');
+                $.notification.show('error','Error al eliminar la frecuencia!');
         })
     }
 }
@@ -106,5 +106,5 @@ $("#modal-default").on('hidden.bs.modal', function () {
     document.getElementById('leyendaEditar').style.display = 'none';
     document.getElementById('buttonGuardar').style.display = 'block';
     document.getElementById('buttonActualizar').style.display = 'none';
-    $("#de_recurso").val('');
+    $("#de_frecuencia").val('');
 });

@@ -1,0 +1,8 @@
+estado_criterio_efqm cambiar en el workbench
+validar longitud y required de los campos al actualizar
+
+modalVersion actualizado maxlength 1 y required
+modaltipo proceso actualizado
+modal recurso actualizado
+modal frecuencia actualizado
+modal cargo

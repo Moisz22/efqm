@@ -1,6 +1,6 @@
 <?php
 
-require_once '../config/Conexion.php';
+require_once 'config/Conexion.php';
 /**
  * para usar los metodos de ayuda, se debe especificar el la propiedad $table
  */
@@ -14,7 +14,6 @@ class Model{
      * Con esta propiedad se especifica la el campo que se va a usar como id
      */
     protected $keyName = 'id';
-    
     /**
      * Con esta propiedad esta la conexion con la base de datos
      */
@@ -30,13 +29,16 @@ class Model{
      */
     public function all()
     {
-        $sql = 'select * from ' . $this->table . ' WHERE estado_'.$this->table.' = 1';
+        $sql = 'select * from ' . $this->table;
         $stm = $this->db->prepare($sql);
         $stm->execute();
-        return $stm->fetchAll(PDO::FETCH_OBJ);
+        return $stm->fetchAll();
     }
 
-    public function guardar(array $array)
+    /**
+     * Con este metodo se guarda los datos en la base de datos especificada
+     */
+    public function save(array $array)
     {
         $cadena_campos = '';
         $cadena_valores = '';
@@ -58,9 +60,12 @@ class Model{
         $sql = 'insert into '. $this->table . '('. $cadena_campos .') values('. $cadena_valores .')';
         $stm = $this->db->prepare($sql);
         $stm->execute( $cadena );
-        echo ($stm->rowCount() > 0) ? 'ok' : 'error' ;
+        return ($stm->rowCount() > 0) ? 'ok' : 'error' ;
     }
 
+    /**
+     * Con este metodo se encuentra un registro en especifico por su propiedad descrita en keyName
+     */
     public function find(int $value)
     {  
         $sql = 'select * from ' . $this->table . ' where ' .$this->keyName. '= :value';
@@ -68,10 +73,25 @@ class Model{
         $stm->bindParam(':value', $value);
         $stm->execute();
         $resultado = $stm->fetchAll();
-        echo json_encode($resultado);
+        return ($resultado);
+    }
+    
+    /**
+     * Con este metodo se elimina un registro por su propiedad asignada en keyName
+     */
+    public function destroy(int $value)
+    {
+        $sql = 'delete from ' . $this->table . ' where ' .$this->keyName. ' = :value';
+        $stm = $this->db->prepare($sql);
+        $stm->bindParam(':value', $value);
+        $stm->execute();
+        return ($stm->rowCount()>0) ? 'ok' : 'error';
     }
 
-    public function actualizar(array $array, string $keyvalue)
+    /**
+     * Con este metodo se actualiza un registro segun la propiedad puesta en keyName
+     */
+    public function update(array $array, string $keyvalue)
     {
         $cadena_campos = '';
         $cadena = [];
@@ -89,15 +109,7 @@ class Model{
         $sql = 'update ' . $this->table . ' set '. $cadena_campos .' where ' .$this->keyName. ' = ' .$keyvalue;
         $stm = $this->db->prepare($sql);
         $stm->execute($cadena);
-        echo ($stm->rowCount() > 0) ? 'ok' : var_dump($cadena) ;
+        return ($stm->rowCount() > 0) ? 'ok' : 'error' ;
     }
 
-    public function eliminar(int $value)
-    {  
-        $sql = 'update ' . $this->table . ' set estado_'.$this->table.' = 0 where ' .$this->keyName. '= :value';
-        $stm = $this->db->prepare($sql);
-        $stm->bindParam(':value', $value);
-        $stm->execute();
-        echo ($stm->rowCount() > 0) ? 'ok' : 'error' ;
-    }
 }

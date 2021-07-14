@@ -1,11 +1,13 @@
 function agregar()
 {
-    let descripcion = $("#de_recurso").val();
+    let descripcion = $("#de_tipo_documento").val();
+    let abreviatura = $("#abreviatura_tipo_documento").val();
     let form_registro = new FormData;
     form_registro.append('descripcion', descripcion);
+    form_registro.append('abreviatura', abreviatura);
     form_registro.append('action', 'guardar');
 
-    fetch('../models/RecursoModel.php', {
+    fetch('../models/TipoDocumentoModel.php', {
 
         method: 'post', 
         body: form_registro
@@ -14,30 +16,31 @@ function agregar()
     .then( res => {  
         if(res=='ok')
         {
-            $.notification.show('success','Recurso creado correctamente!');
+            $.notification.show('success','Tipo de documento creado correctamente!');
             $("#modal-default").modal("hide");
             setTimeout('document.location.reload()',1000);
         }
         else
-            $.notification.show('error','Error al crear el recurso!');
+            $.notification.show('error','Error al crear el tipo de documento!');
     })
 }
 
 function getData(id)
 {
     let form_registro = new FormData;
-    form_registro.append('id_recurso', id);
+    form_registro.append('id_tipo_documento', id);
     form_registro.append('action', 'find');
 
-    fetch('../models/RecursoModel.php', {
+    fetch('../models/TipoDocumentoModel.php', {
 
         method: 'post', 
         body: form_registro
 
     }).then( res => res.json())
     .then( res => {  
-            $("#id_recurso_update").val(res[0].id_recurso);
-            $("#de_recurso").val(res[0].descripcion_recurso);
+            $("#id_tipo_documento_update").val(res[0].id_tipo_documento);
+            $("#de_tipo_documento").val(res[0].descripcion_tipo_documento);
+            $("#abreviatura_tipo_documento").val(res[0].abreviatura_tipo_documento);
             document.getElementById('leyendaAgregar').style.display = 'none';
             document.getElementById('leyendaEditar').style.display = 'block';
             document.getElementById('buttonGuardar').style.display = 'none';
@@ -48,14 +51,16 @@ function getData(id)
 
 function actualizar()
 {
-    let id_recurso = $("#id_recurso_update").val();
-    let descripcion = $("#de_recurso").val();
+    let id_tipo_documento = $("#id_tipo_documento_update").val();
+    let descripcion = $("#de_tipo_documento").val();
+    let abreviatura = $("#abreviatura_tipo_documento").val();
     let form_registro = new FormData;
     form_registro.append('descripcion', descripcion);
-    form_registro.append('id_recurso', id_recurso);
+    form_registro.append('id_tipo_documento', id_tipo_documento);
+    form_registro.append('abreviatura', abreviatura);
     form_registro.append('action', 'actualizar');
 
-    fetch('../models/RecursoModel.php', {
+    fetch('../models/TipoDocumentoModel.php', {
 
         method: 'post', 
         body: form_registro
@@ -64,25 +69,25 @@ function actualizar()
     .then( res => {  
         if(res=='ok')
         {
-            $.notification.show('success','Recurso actualizado correctamente!');
+            $.notification.show('success','Tipo de documento actualizado correctamente!');
             $("#modal-default").modal("hide");
             setTimeout('document.location.reload()',1000);
         }
         else
-            $.notification.show('error','Error al actualizar el recurso!');
+            $.notification.show('error','Error al actualizar el tipo de documento!'+res);
     })
 }
 
-function eliminar(id_recurso)
+function eliminar(id_tipo_documento)
 {
-    var conf = confirm("Desea eliminar este Recurso?");
+    var conf = confirm("Desea eliminar este tipo de proceso?");
     if (conf == true)
     {
         let form_registro = new FormData;
-        form_registro.append('id_recurso', id_recurso);
+        form_registro.append('id_tipo_documento', id_tipo_documento);
         form_registro.append('action', 'eliminar');
 
-        fetch('../models/RecursoModel.php', {
+        fetch('../models/TipoDocumentoModel.php', {
 
             method: 'post', 
             body: form_registro
@@ -91,12 +96,12 @@ function eliminar(id_recurso)
         .then( res => {  
             if(res=='ok')
             {
-                $.notification.show('success','Recurso eliminado correctamente!');
+                $.notification.show('success','Tipo de documento eliminado correctamente!');
                 $("#modal-default").modal("hide");
                 setTimeout('document.location.reload()',1000);
             }
             else
-                $.notification.show('error','Error al eliminar el recurso!');
+                $.notification.show('error','Error al eliminar el tipo de documento!');
         })
     }
 }
@@ -106,5 +111,6 @@ $("#modal-default").on('hidden.bs.modal', function () {
     document.getElementById('leyendaEditar').style.display = 'none';
     document.getElementById('buttonGuardar').style.display = 'block';
     document.getElementById('buttonActualizar').style.display = 'none';
-    $("#de_recurso").val('');
+    $("#de_tipo_documento").val('');
+    $("#abreviatura_tipo_documento").val('');
 });

@@ -17,9 +17,9 @@
         <ul class="nav navbar-nav">
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-             <!--<?php if (isset($active8)||isset($active9)||isset($active10)||isset($active11)||isset($active12)||isset($active13)||isset($active14)||isset($active15)||isset($active16)||isset($active17)||isset($active18)) { echo '<img src="../../fotos/'.$foto.'"  class="user-image" alt="User Image">';} else {echo '<img src="fotos/'.$foto.'"  class="user-image" alt="User Image">';}?>-->
+             <!--<?php if (isset($active8)||isset($active9)||isset($active10)||isset($active11)||isset($active12)||isset($active13)||isset($active14)||isset($active15)||isset($active16)||isset($active17)||isset($active18)) { echo '<img src="../../fotos/'.@$foto.'"  class="user-image" alt="User Image">';} else {echo '<img src="fotos/'.@$foto.'"  class="user-image" alt="User Image">';}?>-->
 
-              <span class="hidden-xs"><?php echo $_SESSION['user_efqm']; ?></span>
+              <span class="hidden-xs"><?php echo @$_SESSION['user_efqm']; ?></span>
             </a>
             <ul class="dropdown-menu">
               <li class="user-header">
