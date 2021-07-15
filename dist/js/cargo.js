@@ -1,3 +1,7 @@
+let url = '../models/CargoModel.php'
+let label = 'cargo'
+let capitalize_label = label.charAt(0).toUpperCase() + label.slice(1)
+
 function agregar()
 {
     let descripcion = $("#de_cargo").val();
@@ -10,7 +14,7 @@ function agregar()
     form_registro.append('jefe_cargo', jefe_cargo);
     form_registro.append('action', 'guardar');
 
-    fetch('../models/CargoModel.php', {
+    fetch(url, {
 
         method: 'post', 
         body: form_registro
@@ -19,12 +23,12 @@ function agregar()
     .then( res => {  
         if(res=='ok')
         {
-            $.notification.show('success','Cargo creado correctamente!');
+            $.notification.show('success',`${capitalize_label} creado correctamente!`);
             $("#modal-default").modal("hide");
             setTimeout('document.location.reload()',1000);
         }
         else
-            $.notification.show('error','Error al crear el cargo!');
+            $.notification.show('error',`Error al crear el ${cargo}!`);
     })
 }
 
@@ -35,7 +39,7 @@ function getData(id)
     form_registro.append('id_cargo', id);
     form_registro.append('action', 'find');
 
-    fetch('../models/CargoModel.php', {
+    fetch(url, {
 
         method: 'post', 
         body: form_registro
@@ -65,7 +69,7 @@ function actualizar()
     form_registro.append('action', 'actualizar');
     form_registro.append('jefe_cargo', jefe_cargo);
 
-    fetch('../models/CargoModel.php', {
+    fetch(url, {
 
         method: 'post', 
         body: form_registro
@@ -74,25 +78,25 @@ function actualizar()
     .then( res => {  
         if(res=='ok')
         {
-            $.notification.show('success','Cargo actualizado correctamente!');
+            $.notification.show('success',`${capitalize_label} actualizado correctamente!`);
             $("#modal-default").modal("hide");
             setTimeout('document.location.reload()',1000);
         }
         else
-            $.notification.show('error','Error al actualizar el cargo!');
+            $.notification.show('error',`Error al actualizar el ${label}!`);
     })
 }
 
 function eliminar(id_cargo)
 {
-    var conf = confirm("Desea eliminar este cargo?");
+    let conf = confirm(`Desea eliminar este ${label}?`);
     if (conf == true)
     {
         let form_registro = new FormData;
         form_registro.append('id_cargo', id_cargo);
         form_registro.append('action', 'eliminar');
 
-        fetch('../models/CargoModel.php', {
+        fetch(url, {
 
             method: 'post', 
             body: form_registro
@@ -101,12 +105,12 @@ function eliminar(id_cargo)
         .then( res => {  
             if(res=='ok')
             {
-                $.notification.show('success','Cargo eliminado correctamente!');
+                $.notification.show('success',`${capitalize_label} eliminado correctamente!`);
                 $("#modal-default").modal("hide");
                 setTimeout('document.location.reload()',1000);
             }
             else
-                $.notification.show('error','Error al eliminar el cargo!');
+                $.notification.show('error',`Error al eliminar el ${label}!`);
         })
     }
 }

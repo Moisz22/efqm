@@ -1,0 +1,1 @@
+{"version":1,"defects":[],"times":{"ModelTest::testAll":0.623,"ModelTest::testGuardar":0.022,"ModelTest::testFind":0.056,"ModelTest::testUpdate":0.03,"ModelTest::testEliminar":0.011}}

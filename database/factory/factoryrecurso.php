@@ -1,22 +1,25 @@
 <?php
 
-require_once '../../vendor/autoload.php';
-require_once '../../models/RecursoModel.php';
+require_once '../../config/config.php';
+require_once '../../config/Conexion.php';
+require_once 'vendor/autoload.php';
 
 class FactoryRecurso{
 
     public $faker;
-    /* private $recurso_model; */
+    private $db;
 
     public function __construct()
     {
         $faker = $this->faker = Faker\Factory::create();
-        /* $this->recurso_model = new RecursoModel; */
+        $this->db = Conexion::getConexion();
     }
 
     public function crearRecurso(){
 
-        /* $this->recurso_model->guardar($this->faker->name); */
+        $stm = $this->db->prepare('INSERT INTO (descripcion_recurso) VALUES(:descripcion_recurso)');
+        $stm->bindParam(':descripcion_recurso', $this->faker->name);
+        $stm->execute();
 
     }
 }

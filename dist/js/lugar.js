@@ -1,0 +1,112 @@
+let url = '../models/LugarModel.php'
+let label = 'Lugar';
+function agregar()
+{
+    let descripcion = $("#de_lugar").val();
+    let form_registro = new FormData;
+    form_registro.append('descripcion', descripcion);
+    form_registro.append('action', 'guardar');
+
+    fetch(url, {
+
+        method: 'post', 
+        body: form_registro
+
+    }).then( res => res.text())
+    .then( res => {  
+        if(res=='ok')
+        {
+            $.notification.show('success', ` ${label} creada correctamente!`);
+            $("#modal-default").modal("hide");
+            setTimeout('document.location.reload()',1000);
+        }
+        else
+            $.notification.show('error','Error al crear el '+  +'!');
+    })
+}
+
+function getData(id)
+{
+    let form_registro = new FormData;
+    form_registro.append('id_lugar', id);
+    form_registro.append('action', 'find');
+
+    fetch(url, {
+
+        method: 'post', 
+        body: form_registro
+
+    }).then( res => res.json())
+    .then( res => {  
+            $("#id_lugar_update").val(res[0].id_lugar);
+            $("#de_lugar").val(res[0].descripcion_lugar);
+            document.getElementById('leyendaAgregar').style.display = 'none';
+            document.getElementById('leyendaEditar').style.display = 'block';
+            document.getElementById('buttonGuardar').style.display = 'none';
+            document.getElementById('buttonActualizar').style.display = 'block';
+            $("#modal-default").modal("show");
+    })
+}
+
+function actualizar()
+{
+    let id_lugar = $("#id_lugar_update").val();
+    let descripcion = $("#de_lugar").val();
+    let form_registro = new FormData;
+    form_registro.append('descripcion', descripcion);
+    form_registro.append('id_lugar', id_lugar);
+    form_registro.append('action', 'actualizar');
+
+    fetch(url, {
+
+        method: 'post', 
+        body: form_registro
+
+    }).then( res => res.text())
+    .then( res => {  
+        if(res=='ok')
+        {
+            $.notification.show('success','Lugar actualizada correctamente!');
+            $("#modal-default").modal("hide");
+            setTimeout('document.location.reload()',1000);
+        }
+        else
+            $.notification.show('error','Error al actualizar la lugar!');
+    })
+}
+
+function eliminar(id_lugar)
+{
+    let conf = confirm("Desea eliminar esta lugar?");
+    if (conf == true)
+    {
+        let form_registro = new FormData;
+        form_registro.append('id_lugar', id_lugar);
+        form_registro.append('action', 'eliminar');
+
+        fetch(url, {
+
+            method: 'post', 
+            body: form_registro
+
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success','Lugar eliminado correctamente!');
+                $("#modal-default").modal("hide");
+                setTimeout('document.location.reload()',1000);
+            }
+            else
+                $.notification.show('error','Error al eliminar el lugar!');
+        })
+    }
+}
+
+$("#modal-default").on('hidden.bs.modal', function () {
+    document.getElementById('leyendaAgregar').style.display = 'block';
+    document.getElementById('leyendaEditar').style.display = 'none';
+    document.getElementById('buttonGuardar').style.display = 'block';
+    document.getElementById('buttonActualizar').style.display = 'none';
+    $("#de_lugar").val('');
+});

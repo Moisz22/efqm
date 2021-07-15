@@ -5,15 +5,14 @@ require_once '../config/Conexion.php';
  * para usar los metodos de ayuda, se debe especificar el la propiedad $table
  */
 class Model{
-
     /**
      * Con esta propiedad se especifica la tabla que se va a usar para los metodos automaticos
      */
-    protected $table = 'users';
+    protected $table = 'frecuencia';
     /**
      * Con esta propiedad se especifica la el campo que se va a usar como id
      */
-    protected $keyName = 'id';
+    protected $keyName = 'id_frecuencia';
     
     /**
      * Con esta propiedad esta la conexion con la base de datos
@@ -31,6 +30,14 @@ class Model{
     public function all()
     {
         $sql = 'select * from ' . $this->table . ' WHERE estado_'.$this->table.' = 1';
+        $stm = $this->db->prepare($sql);
+        $stm->execute();
+        return $stm->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function searchTable($tabla)
+    {
+        $sql = 'select * from ' . $tabla . ' WHERE estado_'.$tabla.' = 1';
         $stm = $this->db->prepare($sql);
         $stm->execute();
         return $stm->fetchAll(PDO::FETCH_OBJ);
@@ -58,7 +65,7 @@ class Model{
         $sql = 'insert into '. $this->table . '('. $cadena_campos .') values('. $cadena_valores .')';
         $stm = $this->db->prepare($sql);
         $stm->execute( $cadena );
-        echo ($stm->rowCount() > 0) ? 'ok' : 'error' ;
+        echo ($stm->rowCount() > 0) ? 'ok' : $sql ;
     }
 
     public function find(int $value)

@@ -15,7 +15,7 @@
       Categoría indicador
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-dashboard"></i> Mantenimientos</a></li>
       <li><a href="#">Categoría indicador</a></li>
     </ol>
   </section>

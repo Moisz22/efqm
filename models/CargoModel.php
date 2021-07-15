@@ -2,7 +2,7 @@
 
 require_once 'Model.php';
 
-class cargoModel extends Model{
+class CargoModel extends Model{
 
     protected $table = 'cargo';
 
@@ -10,7 +10,7 @@ class cargoModel extends Model{
 
 }
 
-$cargoModel = new cargoModel();
+$cargoModel = new CargoModel();
 
 if(isset($_POST['action']))
 {

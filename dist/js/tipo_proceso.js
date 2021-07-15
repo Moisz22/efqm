@@ -1,3 +1,5 @@
+let url = '../models/TipoProcesoModel.php'
+
 function agregar()
 {
     let descripcion = $("#de_tipo_proceso").val();
@@ -7,7 +9,7 @@ function agregar()
     form_registro.append('abreviatura', abreviatura);
     form_registro.append('action', 'guardar');
 
-    fetch('../models/TipoProcesoModel.php', {
+    fetch(url, {
 
         method: 'post', 
         body: form_registro
@@ -31,7 +33,7 @@ function getData(id)
     form_registro.append('id_tipo_proceso', id);
     form_registro.append('action', 'find');
 
-    fetch('../models/TipoProcesoModel.php', {
+    fetch(url, {
 
         method: 'post', 
         body: form_registro
@@ -60,7 +62,7 @@ function actualizar()
     form_registro.append('abreviatura', abreviatura);
     form_registro.append('action', 'actualizar');
 
-    fetch('../models/TipoProcesoModel.php', {
+    fetch(url, {
 
         method: 'post', 
         body: form_registro
@@ -80,14 +82,14 @@ function actualizar()
 
 function eliminar(id_tipo_proceso)
 {
-    var conf = confirm("Desea eliminar este tipo de proceso?");
+    let conf = confirm("Desea eliminar este tipo de proceso?");
     if (conf == true)
     {
         let form_registro = new FormData;
         form_registro.append('id_tipo_proceso', id_tipo_proceso);
         form_registro.append('action', 'eliminar');
 
-        fetch('../models/TipoProcesoModel.php', {
+        fetch(url, {
 
             method: 'post', 
             body: form_registro

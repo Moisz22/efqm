@@ -2,7 +2,7 @@
 
 require_once 'Model.php';
 
-class frecuenciaModel extends Model{
+class FrecuenciaModel extends Model{
 
     protected $table = 'frecuencia';
 
@@ -10,7 +10,7 @@ class frecuenciaModel extends Model{
 
 }
 
-$frecuenciaModel = new frecuenciaModel();
+$frecuenciaModel = new FrecuenciaModel();
 
 if(isset($_POST['action']))
 {

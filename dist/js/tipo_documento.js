@@ -1,3 +1,5 @@
+let url = '../models/TipoDocumentoModel.php'
+
 function agregar()
 {
     let descripcion = $("#de_tipo_documento").val();
@@ -7,7 +9,7 @@ function agregar()
     form_registro.append('abreviatura', abreviatura);
     form_registro.append('action', 'guardar');
 
-    fetch('../models/TipoDocumentoModel.php', {
+    fetch(url, {
 
         method: 'post', 
         body: form_registro
@@ -31,7 +33,7 @@ function getData(id)
     form_registro.append('id_tipo_documento', id);
     form_registro.append('action', 'find');
 
-    fetch('../models/TipoDocumentoModel.php', {
+    fetch(url, {
 
         method: 'post', 
         body: form_registro
@@ -60,7 +62,7 @@ function actualizar()
     form_registro.append('abreviatura', abreviatura);
     form_registro.append('action', 'actualizar');
 
-    fetch('../models/TipoDocumentoModel.php', {
+    fetch(url, {
 
         method: 'post', 
         body: form_registro
@@ -80,14 +82,14 @@ function actualizar()
 
 function eliminar(id_tipo_documento)
 {
-    var conf = confirm("Desea eliminar este tipo de proceso?");
+    let conf = confirm("Desea eliminar este tipo de proceso?");
     if (conf == true)
     {
         let form_registro = new FormData;
         form_registro.append('id_tipo_documento', id_tipo_documento);
         form_registro.append('action', 'eliminar');
 
-        fetch('../models/TipoDocumentoModel.php', {
+        fetch(url, {
 
             method: 'post', 
             body: form_registro

@@ -80,7 +80,7 @@ function actualizar()
 
 function eliminar(id_criterio_efqm)
 {
-    var conf = confirm("Desea eliminar este criterio EFQM?");
+    let conf = confirm("Desea eliminar este criterio EFQM?");
     if (conf == true)
     {
         let form_registro = new FormData;

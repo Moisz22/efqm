@@ -1,3 +1,5 @@
+let url = '../models/RecursoModel.php'
+
 function agregar()
 {
     let descripcion = $("#de_recurso").val();
@@ -5,7 +7,7 @@ function agregar()
     form_registro.append('descripcion', descripcion);
     form_registro.append('action', 'guardar');
 
-    fetch('../models/RecursoModel.php', {
+    fetch(url, {
 
         method: 'post', 
         body: form_registro
@@ -29,7 +31,7 @@ function getData(id)
     form_registro.append('id_recurso', id);
     form_registro.append('action', 'find');
 
-    fetch('../models/RecursoModel.php', {
+    fetch(url, {
 
         method: 'post', 
         body: form_registro
@@ -55,7 +57,7 @@ function actualizar()
     form_registro.append('id_recurso', id_recurso);
     form_registro.append('action', 'actualizar');
 
-    fetch('../models/RecursoModel.php', {
+    fetch(url, {
 
         method: 'post', 
         body: form_registro
@@ -75,14 +77,14 @@ function actualizar()
 
 function eliminar(id_recurso)
 {
-    var conf = confirm("Desea eliminar este Recurso?");
+    let conf = confirm("Desea eliminar este Recurso?");
     if (conf == true)
     {
         let form_registro = new FormData;
         form_registro.append('id_recurso', id_recurso);
         form_registro.append('action', 'eliminar');
 
-        fetch('../models/RecursoModel.php', {
+        fetch(url, {
 
             method: 'post', 
             body: form_registro

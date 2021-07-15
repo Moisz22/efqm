@@ -32,12 +32,11 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.0/css/responsive.dataTables.min.css">
     <!--GRAPH-->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <link rel="stylesheet" type="text/css" href="../dist/css/style.css">
     <!--ESTILO Y TAMAÑO DE FUENTE-->
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
       <!--ESTILO PARA MENSAJE DE NOTIFICACION-->
-     <?php if (isset($active10)||isset($active11)||isset($active16)||isset($active17)) { echo '<link rel="stylesheet" type="text/css" href="css/style.css">';}?>
+      <link rel="stylesheet" type="text/css" href="../dist/css/style.css">
      <!--JQUERY-->
      <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 

@@ -1,3 +1,5 @@
+let url = '../models/FrecuenciaModel.php'
+
 function agregar()
 {
     let descripcion = $("#de_frecuencia").val();
@@ -5,7 +7,7 @@ function agregar()
     form_registro.append('descripcion', descripcion);
     form_registro.append('action', 'guardar');
 
-    fetch('../models/FrecuenciaModel.php', {
+    fetch(url, {
 
         method: 'post', 
         body: form_registro
@@ -29,7 +31,7 @@ function getData(id)
     form_registro.append('id_frecuencia', id);
     form_registro.append('action', 'find');
 
-    fetch('../models/FrecuenciaModel.php', {
+    fetch(url, {
 
         method: 'post', 
         body: form_registro
@@ -55,7 +57,7 @@ function actualizar()
     form_registro.append('id_frecuencia', id_frecuencia);
     form_registro.append('action', 'actualizar');
 
-    fetch('../models/FrecuenciaModel.php', {
+    fetch(url, {
 
         method: 'post', 
         body: form_registro
@@ -75,7 +77,7 @@ function actualizar()
 
 function eliminar(id_frecuencia)
 {
-    var conf = confirm("Desea eliminar esta frecuencia?");
+    let conf = confirm("Desea eliminar esta frecuencia?");
     if (conf == true)
     {
         let form_registro = new FormData;

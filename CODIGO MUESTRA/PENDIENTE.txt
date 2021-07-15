@@ -6,3 +6,11 @@ modaltipo proceso actualizado
 modal recurso actualizado
 modal frecuencia actualizado
 modal cargo
+
+--------------------------------------------------------------
+
+en caso de que falten mas hojas del capitulo 2 
+agregar git - github
+phpunit y fakerphp
+
+REVISAR LOS NULL EN CLAVES FORANEAS
