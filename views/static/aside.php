@@ -2,13 +2,6 @@
     <section class="sidebar">
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <!-- <li class="<?php if(isset($active1)){echo $active1;}?>"><a href="dahboard"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>        
-        <li><a href="pages/indicadores/index.php"><i class="fas fa-thumbtack"></i> <span>Indicadores</span></a></li>
-        <li><a href="pages/actas_reunion/index.php"><i class="fas fa-file-signature"></i> <span>Actas de equipo</span></a></li>
-        <li class="<?php if(isset($active21)){echo $active21;}?>"><a href="manual.php"><i class="fas fa-file-pdf-o"></i><span> Manual de usuario</span></a></li>
-        <li class="<?php if(isset($active23)){echo $active23;}?>"><a href="http://apps.colegioamericano.edu.ec/evaluaciones" target="_blank"><i class="fas fa-list-ol"></i><span> Evaluaciones</span></a></li>
-        <li class="<?php if(isset($active7)){echo $active7;}?>"><a href="https://es.surveymonkey.com/home/?ut_source=header" target="_blank"><i class="fas fa-tasks"></i><span> Encuestas</span></a></li>
-        <li><a href="pages/actualizacion_datos/procesos.php"><i class="fas fa-clipboard-list"></i> <span>Procesos</span></a></li> -->
         <li class="treeview <?php if(isset($active2)||isset($active3)||isset($active4)||isset($active5)||isset($active6)||isset($active7)||isset($active8)||isset($active9)||isset($active10)||isset($active11)||isset($active12)){echo 'active';}?>">
           <a href="#">
           <i class="fas fa-wrench"></i> <span>Mantenimientos</span>
@@ -28,6 +21,19 @@
             <li class="<?php if(isset($active10)){echo $active10;}?>"><a href="lugares"><i class="fas fa-map"></i> <span>Lugares</span></a></li>
             <li class="<?php if(isset($active11)){echo $active11;}?>"><a href="persona"><i class="fas fa-users"></i> <span>Personas</span></a></li>
             <li class="<?php if(isset($active12)){echo $active12;}?>"><a href="equipo_trabajo"><i class="far fa-handshake"></i> <span>Equipos de trabajo</span></a></li>
+          </ul>
+        </li>
+        <li class="treeview <?php if(isset($active13)||isset($active14)||isset($active15)){echo 'active';}?>">
+          <a href="#">
+          <i class="fas fa-cogs"></i> <span>Operativo</span>
+          <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+          </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php if(isset($active13)){echo $active13;}?>"><a href="procesos"><i class="fas fa-clipboard-list"></i> <span>Procesos</span></a></li>
+            <!--<li class="<?php if(isset($active14)){echo $active14;}?>"><a href="version"><i class="fas fa-code-branch"></i> <span>Versión</span></a></li>
+            <li class="<?php if(isset($active15)){echo $active15;}?>"><a href="cargos"><i class="fas fa-briefcase"></i> <span>Cargos</span></a></li>-->
           </ul>
         </li>
       </ul>

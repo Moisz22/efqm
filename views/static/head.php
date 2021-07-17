@@ -22,6 +22,8 @@
     <!--FONT-AWESOME-->
     <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <!--SELECT2-->
+    <link rel="stylesheet" href="../plugins/select2/dist/css/select2.min.css">
     <!--PLANTILLA-->
     <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">

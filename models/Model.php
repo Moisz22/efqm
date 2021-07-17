@@ -65,7 +65,7 @@ class Model{
         $sql = 'insert into '. $this->table . '('. $cadena_campos .') values('. $cadena_valores .')';
         $stm = $this->db->prepare($sql);
         $stm->execute( $cadena );
-        echo ($stm->rowCount() > 0) ? 'ok' : $sql ;
+        echo ($stm->rowCount() > 0) ? 'ok' : 'error' ;
     }
 
     public function find(int $value)
