@@ -40,9 +40,7 @@ function agregar()
     form_registro.append('objetivo', objetivo);
     form_registro.append('alcance', alcance);
     form_registro.append('action', 'guardarProceso');
-
     fetch(url, {
-
         method: 'post', 
         body: form_registro
 
@@ -57,9 +55,11 @@ function agregar()
             guardaResponsables(array[1],JSON.stringify(responsables));
             guardaIndicadores(array[1],JSON.stringify(indicador));
             guardaProcesosRelacionados(array[1],JSON.stringify(procesos_relacionados));
+            $('#btn_guardar').attr('onclick', '');
         }
-        else
-            $.notification.show('error',`Error al crear el ${label}!  ${array}`);
+        else $.notification.show('error',`Error al crear el ${label}!`);
+
+        $("#modal-default-cargando").modal("hide");
     })
 }
 function guardaResponsables(id_proceso, array_responsables)
@@ -67,7 +67,7 @@ function guardaResponsables(id_proceso, array_responsables)
         let form_registro = new FormData;
         form_registro.append('id_proceso', id_proceso);
         form_registro.append('responsables', array_responsables);
-        form_registro.append('action', '');
+        form_registro.append('action', 'guardarResponsables');
     
         fetch(url, {
     
@@ -81,7 +81,7 @@ function guardaResponsables(id_proceso, array_responsables)
                console.log('responsables guardados');
             }
             else
-            alert(res);
+            alert('EEEEEE');
         })
 }
 function guardaIndicadores(id_proceso, array_indicadores)

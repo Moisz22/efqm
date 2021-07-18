@@ -43,6 +43,14 @@ class Model{
         return $stm->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function searchTableWhere($tabla, $campo, $valor)
+    {
+        $sql = 'select * from ' . $tabla . ' WHERE estado_'.$tabla.' = 1 AND '.$campo.' = '.$valor;
+        $stm = $this->db->prepare($sql);
+        $stm->execute();
+        return $stm->fetchAll(PDO::FETCH_OBJ);
+    }
+    
     public function guardar(array $array)
     {
         $cadena_campos = '';

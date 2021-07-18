@@ -1,4 +1,6 @@
 let url = '../models/VersionModel.php'
+let label = 'version'
+let capitalize_label = label.charAt(0).toUpperCase() + label.slice(1)
 
 function agregar()
 {
@@ -16,12 +18,12 @@ function agregar()
     .then( res => {  
         if(res=='ok')
         {
-            $.notification.show('success','Versión creado correctamente!');
+            $.notification.show('success',`${capitalize_label} creada correctamente!`);
             $("#modal-default").modal("hide");
             setTimeout('document.location.reload()',1000);
         }
         else
-            $.notification.show('error','Error al crear el versión!');
+            $.notification.show('error',`Error al crear la ${label}!`);
     })
 }
 
@@ -66,18 +68,18 @@ function actualizar()
     .then( res => {  
         if(res=='ok')
         {
-            $.notification.show('success','Versión actualizado correctamente!');
+            $.notification.show('success',`${capitalize_label} actualizada correctamente!`);
             $("#modal-default").modal("hide");
             setTimeout('document.location.reload()',1000);
         }
         else
-            $.notification.show('error','Error al actualizar el versión!');
+            $.notification.show('error',`Error al actualizar la ${label}!`);
     })
 }
 
 function eliminar(id_version)
 {
-    let conf = confirm("Desea eliminar este versión?");
+    let conf = confirm(`Desea eliminar esta ${label}?`);
     if (conf == true)
     {
         let form_registro = new FormData;
@@ -93,12 +95,12 @@ function eliminar(id_version)
         .then( res => {  
             if(res=='ok')
             {
-                $.notification.show('success','Versión eliminada correctamente!');
+                $.notification.show('success',`${capitalize_label} eliminada correctamente!`);
                 $("#modal-default").modal("hide");
                 setTimeout('document.location.reload()',1000);
             }
             else
-                $.notification.show('error','Error al eliminar la versión!');
+                $.notification.show('error',`Error al eliminar la ${label}!`);
         })
     }
 }

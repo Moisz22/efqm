@@ -18,14 +18,6 @@ class ProcesoModel extends Model{
         $stm->execute();
         return $stm->fetchAll(PDO::FETCH_OBJ);
     }
-    
-    public function searchTableWhere($tabla, $flag)
-    {
-        $sql = 'select * from ' . $tabla . ' WHERE estado_'.$tabla.' = 1 AND jefe_cargo = '.$flag;
-        $stm = $this->db->prepare($sql);
-        $stm->execute();
-        return $stm->fetchAll(PDO::FETCH_OBJ);
-    }
 
     public function guardarProceso(array $array)
     {

@@ -30,7 +30,7 @@
           <div class="box-body">
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar Recurso
             </button><br><br>
-            <table id="example1" class="display responsive nowrap table table-striped table-bordered" style="width:100%">
+            <table class="display responsive nowrap table table-striped table-bordered" style="width:100%">
               <thead>
                 <tr>
                   <th>ID</th>
@@ -65,9 +65,7 @@
 <script type="text/javascript" src="../dist/js/jquery.notification.js"></script>
 <script>
   $(document).ready(function() {
-      $('#example1').DataTable( {
-        "order": []
-      } );
+    $('table.display').DataTable();
   } );
   
 </script>

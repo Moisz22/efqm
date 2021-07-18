@@ -5,14 +5,15 @@
   include "static/header.php";
   include "static/aside.php";
   include '../models/ProcesoModel.php';
+  include '../controllers/ActividadController.php';
   $rmodel = new ProcesoModel;
   $resultados = $rmodel->consulta();
   $comboTipoProceso = $rmodel->searchTable('tipo_proceso');
-  $comboPropietario = $rmodel->searchTableWhere('cargo', 1);
+  $comboPropietario = $rmodel->searchTableWhere('cargo', 'jefe_cargo', 1);
   $comboVersion = $rmodel->searchTable('version');
   $comboIndicador = $rmodel->searchTable('indicador');
   $comboProceso = $rmodel->searchTable('proceso');
-  $comboResponsable = $rmodel->searchTableWhere('cargo', 0);
+  $comboResponsable = $rmodel->searchTableWhere('cargo', 'jefe_cargo', 0);
   ?>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -33,25 +34,26 @@
           <div class="box-header">
             <h3 class="box-title">
               <button id="btn_regresar" name="btn_regresar" class='btn btn-danger' type="button" onclick="window.history.back();"><span class='fa fa-chevron-left'></span> Volver</button>
-              <a onclick="agregar()" class="btn  btn-success">Guardar</a>
+              <a id="btn_guardar" onclick="agregar()" class="btn  btn-success">Guardar</a>
             </h3>
           </div>
           <div class="box-body">
             <div id="tabs" name="tabs" class="nav-tabs-custom">
               <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab1" data-toggle="tab" onClick=""><span class="fa fa-clipboard"></span> Datos Generales</a></li>
-                <li class="mostrarOpcion" style="display: none;"><a href="#tab2" data-toggle="tab" onClick=""><span class="fa fa-users"></span> Actividades</a></li>
-                <li class="mostrarOpcion" style="display: none;"><a href="#tab3" data-toggle="tab" onClick=""><span class="fas fa-arrow-up"></span> Entradas:</a></li>
-                <li class="mostrarOpcion" style="display: none;"><a href="#tab4" data-toggle="tab" onClick=""><span class="fas fa-arrow-down"></span> Salidas:</a></li>
-                <li class="mostrarOpcion" style="display: none;"><a href="#tab5" data-toggle="tab" onClick=""><span class="fa fa-lightbulb-o"></span> Políticas</a></li>
-                <li class="mostrarOpcion" style="display: none;"><a href="#tab6" data-toggle="tab" onClick=""><span class="far fa-folder-open"></span> Anexos</a></li>
-                <li class="mostrarOpcion" style="display: none;"><a href="#tab7" data-toggle="tab" onClick=""><i class="fas fa-exchange-alt"></i></span> Control de cambios</a></li>
-                <li class="mostrarOpcion" style="display: none;"><a href="#tab8" data-toggle="tab" onClick=""><i class="fas fa-archive"></i></span> Recursos</a></li>                
+                <li class="mostrarOpcion" style="display: block;"><a href="#tab2" data-toggle="tab" onClick=""><span class="fa fa-users"></span> Actividades</a></li>
+                <li class="mostrarOpcion" style="display: block;"><a href="#tab3" data-toggle="tab" onClick=""><span class="fas fa-arrow-up"></span> Sub actividades:</a></li>
+                <li class="mostrarOpcion" style="display: block;"><a href="#tab4" data-toggle="tab" onClick=""><span class="fas fa-arrow-up"></span> Entradas:</a></li>
+                <li class="mostrarOpcion" style="display: block;"><a href="#tab5" data-toggle="tab" onClick=""><span class="fas fa-arrow-down"></span> Salidas:</a></li>
+                <li class="mostrarOpcion" style="display: block;"><a href="#tab6" data-toggle="tab" onClick=""><span class="fa fa-lightbulb-o"></span> Políticas</a></li>
+                <li class="mostrarOpcion" style="display: block;"><a href="#tab7" data-toggle="tab" onClick=""><span class="far fa-folder-open"></span> Anexos</a></li>
+                <li class="mostrarOpcion" style="display: block;"><a href="#tab8" data-toggle="tab" onClick=""><i class="fas fa-exchange-alt"></i></span> Control de cambios</a></li>
+                <li class="mostrarOpcion" style="display: block;"><a href="#tab9" data-toggle="tab" onClick=""><i class="fas fa-archive"></i></span> Recursos</a></li>                
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="tab1" name="tab1">
                   <div class="row">
-                    <input type="hidden" id="id_proceso">
+                    <input type="hidden" id="id_proceso" value="1">
                     <div class="form-group col-md-6">
                       <label>Nombre del Proceso: </label>      
                       <input type="text" id="nombre_proceso"  style="width: 100%;" class="form-control" required />
@@ -129,8 +131,59 @@
                 <div class="tab-pane" id="tab2" name="tab2">
                   <div class="row">
                     <div class="col-md-12">
-                      <a data-toggle="modal" class="btn btn-success" href="#add_new_record_modal"><i class="fa fa-plus"></i></a>
+                      <a data-toggle="modal" class="btn btn-success" href="#modal-default-actividad"><i class="fa fa-plus"></i></a><br><br>
                       <div class="records_actividades"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab3" name="tab3">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="records_subactividades"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab4" name="tab4">
+                  <div class="row">
+                    <div class="col-md-12">
+                    <a data-toggle="modal" class="btn btn-success" href="#modal-default-entrada"><i class="fa fa-plus"></i></a><br><br>
+                      <div class="records_entradas"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab5" name="tab5">
+                  <div class="row">
+                    <div class="col-md-12">
+                    <a data-toggle="modal" class="btn btn-success" href="#modal-default-salida"><i class="fa fa-plus"></i></a><br><br>
+                      <div class="records_salidas"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab6" name="tab6">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="records_politicas"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab7" name="tab7">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="records_anexos"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab8" name="tab8">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="records_control_cambio"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab9" name="tab9">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="records_recursos"></div>
                     </div>
                   </div>
                 </div>
@@ -144,17 +197,16 @@
 </div>
 <?php
   include 'static/footer.php';
-  ?>
+  include 'components/modalCargando.php';
+  include 'components/modalActividad.php';
+  include 'components/modalEntrada.php';
+  include 'components/modalSalida.php';
+?>
 <script type="text/javascript" src="../dist/js/proceso.js"></script>
+<script type="text/javascript" src="../dist/js/actividad.js"></script>
+<script type="text/javascript" src="../dist/js/subactividad.js"></script>
+<script type="text/javascript" src="../dist/js/entrada.js"></script>
 <script type="text/javascript" src="../dist/js/jquery.notification.js"></script>
-<script>
-  $(document).ready(function() {
-      $('#example1').DataTable( {
-        "order": []
-      } );
-  } );
-  
-</script>
 <script>
   $('.select2').select2()
 </script>

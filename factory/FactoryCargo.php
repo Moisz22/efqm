@@ -3,26 +3,28 @@
 require_once 'config/config.php';
 require_once 'config/Conexion.php';
 require_once 'vendor/autoload.php';
+require_once 'Factory.php';
 
-class FactoryCargo{
+class FactoryCargo extends Factory{
 
     private $faker;
     private $db;
     public $cantidadRegistros;
+    public $trabajos;
 
     public function __construct()
     {
         $this->faker = Faker\Factory::create();
         $this->db = Conexion::getConexion();
         $this->cantidadRegistros = 10;
+        $this->trabajos = array_merge($this->systems, $this->humanResources, $this->marketing);
     }
 
     public function crearCargo(){
 
         for($i=0; $i<$this->cantidadRegistros; $i++){
             
-            $cargo = $this->faker->word;
-
+            $cargo = $this->faker->unique()->randomElement($this->trabajos);
             $stm = $this->db->prepare('INSERT INTO cargo(descripcion_cargo) VALUES(:descripcion_cargo)');
             $stm->bindParam(':descripcion_cargo', $cargo);
             $stm->execute();
