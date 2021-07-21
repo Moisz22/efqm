@@ -14,6 +14,8 @@
   $comboIndicador = $rmodel->searchTable('indicador');
   $comboProceso = $rmodel->searchTable('proceso');
   $comboResponsable = $rmodel->searchTableWhere('cargo', 'jefe_cargo', 0);
+  $comboTipoDocumento = $rmodel->searchTable('tipo_documento');
+  $comboRecurso = $rmodel->searchTable('recurso');
   ?>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -48,7 +50,7 @@
                 <li class="mostrarOpcion" style="display: block;"><a href="#tab6" data-toggle="tab" onClick=""><span class="fa fa-lightbulb-o"></span> Políticas</a></li>
                 <li class="mostrarOpcion" style="display: block;"><a href="#tab7" data-toggle="tab" onClick=""><span class="far fa-folder-open"></span> Anexos</a></li>
                 <li class="mostrarOpcion" style="display: block;"><a href="#tab8" data-toggle="tab" onClick=""><i class="fas fa-exchange-alt"></i></span> Control de cambios</a></li>
-                <li class="mostrarOpcion" style="display: block;"><a href="#tab9" data-toggle="tab" onClick=""><i class="fas fa-archive"></i></span> Recursos</a></li>                
+                <li class="mostrarOpcion" style="display: block;"><a href="#tab9" data-toggle="tab" onClick=""><i class="fas fa-archive"></i></span> Recursos</a></li>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="tab1" name="tab1">
@@ -146,7 +148,7 @@
                 <div class="tab-pane" id="tab4" name="tab4">
                   <div class="row">
                     <div class="col-md-12">
-                    <a data-toggle="modal" class="btn btn-success" href="#modal-default-entrada"><i class="fa fa-plus"></i></a><br><br>
+                      <a data-toggle="modal" class="btn btn-success" href="#modal-default-entrada"><i class="fa fa-plus"></i></a><br><br>
                       <div class="records_entradas"></div>
                     </div>
                   </div>
@@ -154,7 +156,7 @@
                 <div class="tab-pane" id="tab5" name="tab5">
                   <div class="row">
                     <div class="col-md-12">
-                    <a data-toggle="modal" class="btn btn-success" href="#modal-default-salida"><i class="fa fa-plus"></i></a><br><br>
+                      <a data-toggle="modal" class="btn btn-success" href="#modal-default-salida"><i class="fa fa-plus"></i></a><br><br>
                       <div class="records_salidas"></div>
                     </div>
                   </div>
@@ -162,6 +164,7 @@
                 <div class="tab-pane" id="tab6" name="tab6">
                   <div class="row">
                     <div class="col-md-12">
+                      <a data-toggle="modal" class="btn btn-success" href="#modal-default-politica"><i class="fa fa-plus"></i></a><br><br>
                       <div class="records_politicas"></div>
                     </div>
                   </div>
@@ -169,22 +172,53 @@
                 <div class="tab-pane" id="tab7" name="tab7">
                   <div class="row">
                     <div class="col-md-12">
-                      <div class="records_anexos"></div>
+                    <form enctype="multipart/form-data" id="sube_anexo" method="post">
+                        <div class="form-group col-md-6">
+                          <label for="empleados">Tipo Documento: </label>      
+                          <select class="form-control" id="tipo_documento_anexo" name="tipo_documento_anexo" required title="Tipo de documento">
+                            <option value="">Seleccione...</option>
+                            <?php foreach($comboTipoDocumento as $rowd): ?>
+                              <option value="<?php echo $rowd->id_tipo_documento; ?>"><?php echo $rowd->descripcion_tipo_documento; ?></option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="empleados">Descripción de documento: </label>      
+                          <input type="text" name="descripcion_anexo_proceso" id="descripcion_anexo_proceso"  style="width: 100%;" class="form-control" required title="Descripción de documento">
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="first_name">Actividad asociada: </label>
+                          <select class="form-control cbx_actividad" name="id_actividad_anexo_proceso" id="id_actividad_anexo_proceso" title="Actividad asociada"></select>
+                        </div>
+                        <div class="form-group col-md-6">                        
+                          <label>Seleccione archivo:</label>
+                          <input type="file" id="anexo" name="anexo" class="form-control" title="Anexo">
+                        </form>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <br>
+                          <a onclick="agregarAnexoProceso()" class="btn btn-success"><i class="fa fa-upload"></i> Subir anexo</a>
+                        </div>
+                        <div class="form-group col-md-12">
+                        <br><br><div class="records_anexo_proceso"></div>
+                        </div>
                     </div>
+                    
                   </div>
                 </div>
-                <div class="tab-pane" id="tab8" name="tab8">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="records_control_cambio"></div>
-                    </div>
+              <div class="tab-pane" id="tab8" name="tab8">
+                <div class="row">
+                  <div class="col-md-12">
+                  <a data-toggle="modal" class="btn btn-success" href="#modal-default-control-cambio"><i class="fa fa-plus"></i></a><br><br>
+                    <div class="records_control_cambio"></div>
                   </div>
                 </div>
-                <div class="tab-pane" id="tab9" name="tab9">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="records_recursos"></div>
-                    </div>
+              </div>
+              <div class="tab-pane" id="tab9" name="tab9">
+                <div class="row">
+                  <div class="col-md-12">
+                  <a data-toggle="modal" class="btn btn-success" href="#modal-default-recurso-proceso"><i class="fa fa-plus"></i></a><br><br>
+                    <div class="records_recursos"></div>
                   </div>
                 </div>
               </div>
@@ -193,7 +227,8 @@
         </div>
       </div>
     </div>
-  </section>
+</div>
+</section>
 </div>
 <?php
   include 'static/footer.php';
@@ -201,11 +236,21 @@
   include 'components/modalActividad.php';
   include 'components/modalEntrada.php';
   include 'components/modalSalida.php';
-?>
+  include 'components/modalPolitica.php';
+  include 'components/modalControlCambio.php';
+  include 'components/modalAnexoProceso.php';
+  include 'components/modalRecursoProceso.php';
+  ?>
+<script type="text/javascript" src="../dist/js/core.js"></script>
 <script type="text/javascript" src="../dist/js/proceso.js"></script>
+<script type="text/javascript" src="../dist/js/control_cambio.js"></script>
 <script type="text/javascript" src="../dist/js/actividad.js"></script>
 <script type="text/javascript" src="../dist/js/subactividad.js"></script>
 <script type="text/javascript" src="../dist/js/entrada.js"></script>
+<script type="text/javascript" src="../dist/js/salida.js"></script>
+<script type="text/javascript" src="../dist/js/politica.js"></script>
+<script type="text/javascript" src="../dist/js/anexo_proceso.js"></script>
+<script type="text/javascript" src="../dist/js/recurso_proceso.js"></script>
 <script type="text/javascript" src="../dist/js/jquery.notification.js"></script>
 <script>
   $('.select2').select2()

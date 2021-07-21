@@ -14,3 +14,8 @@ agregar git - github
 phpunit y fakerphp
 
 REVISAR LOS NULL EN CLAVES FORANEAS
+
+--------------------20/07/2021---------------------------------
+AGREGAR VALIDADOR DE CAMPOS A TODOS LOS MODALES
+HACER LA FUNCION DE VALIDACION GLOBAL
+SOLO ESTÁ PUESTO EN ACTIVIDAD

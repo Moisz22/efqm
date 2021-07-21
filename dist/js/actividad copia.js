@@ -41,17 +41,42 @@ function llenarComboActividad()
 }
 function agregarActividad()
 {
-    let orden_actividad = document.getElementById("orden_actividad");
-    let de_actividad = document.getElementById("de_actividad");
-    let id_proceso = $("#id_proceso");
+
+
+    let orden_actividad = document.getElementById('orden_actividad')
+    let de_actividad = document.getElementById('de_actividad')
+    let id_proceso = $("#id_proceso")
+    let bandera = true
+
+    function validarCampos(elementos) {
+        
+        const span = document.createElement('span')
+        span.textContent = 'la entrada no puede estar vacia'
+        span.classList.add('help-block');
+
+        [...elementos].map( e => {
     
-    let validacion = validarCampos([orden_actividad, de_actividad]);
-    if(validacion==true)
-    {
-        let form_registro = new FormData;
-    form_registro.append('id_proceso', id_proceso.val());
-    form_registro.append('orden_actividad', orden_actividad.value);
-    form_registro.append('de_actividad', de_actividad.value);
+            if(e.value.trim() == null || e.value.trim() == ''){
+                //$("#spam_orden_actividad").css('display', 'block');
+                bandera = false
+                e.parentElement.classList.add('has-error')
+                e.insertAdjacentElement('afterend', span)
+            }
+    
+        })
+
+        return bandera
+    
+    }
+
+    validarCampos([orden_actividad, de_actividad])
+    /* let orden_actividad = $("#orden_actividad").val();
+    let de_actividad = $("#de_actividad").val();
+    let id_proceso = $("#id_proceso").val();
+    let form_registro = new FormData;
+    form_registro.append('id_proceso', id_proceso);
+    form_registro.append('orden_actividad', orden_actividad);
+    form_registro.append('de_actividad', de_actividad);
     form_registro.append('action', 'guardar');
 
     fetch(url_actividad, {
@@ -70,8 +95,7 @@ function agregarActividad()
         }
         else
             $.notification.show('error',`Error al crear la ${res}!`);
-    })
-    }
+    }) */
 }
 
 function getDataActividad(id)
@@ -102,33 +126,30 @@ function getDataActividad(id)
 function actualizarActividad()
 {
     let id_actividad = $("#id_actividad_update").val();
-    let orden_actividad = document.getElementById("orden_actividad");
-    let de_actividad = document.getElementById("de_actividad");
+    let orden = $("#orden_actividad").val();
+    let descripcion = $("#de_actividad").val();
     let form_registro = new FormData;
-    form_registro.append('orden', orden_actividad.value);
-    form_registro.append('descripcion', de_actividad.value);
+    form_registro.append('orden', orden);
+    form_registro.append('descripcion', descripcion);
     form_registro.append('id_actividad', id_actividad);
     form_registro.append('action', 'actualizar');
-    let validacion = validarCampos([orden_actividad, de_actividad]);
-    if(validacion==true)
-    {
-        fetch(url_actividad, {
 
-            method: 'post', 
-            body: form_registro
+    fetch(url_actividad, {
 
-        }).then( res => res.text())
-        .then( res => {  
-            if(res=='ok')
-            {
-                $.notification.show('success',`${capitalize_label_actividad} actualizada correctamente!`);
-                $(modal_actividad).modal("hide");
-                obtenerTablaActividad();
-            }
-            else
-                $.notification.show('error',`Error al actualizar el ${label_actividad}!`);
-        })
-    }
+        method: 'post', 
+        body: form_registro
+
+    }).then( res => res.text())
+    .then( res => {  
+        if(res=='ok')
+        {
+            $.notification.show('success',`${capitalize_label_actividad} actualizada correctamente!`);
+            $(modal_actividad).modal("hide");
+            obtenerTablaActividad();
+        }
+        else
+            $.notification.show('error',`Error al actualizar el ${label_actividad}!`);
+    })
 }
 
 function eliminarActividad(id_actividad)
@@ -166,8 +187,7 @@ $(modal_actividad).on('hidden.bs.modal', function () {
     $("#de_actividad").val('');
     $("#orden_actividad").val('');
 
-    let elementos = [...document.querySelectorAll('.campo_vacio')]
-    elementos.map( e => e.classList.remove('campo_vacio') )
+    document.getElementById('de_actividad').parentElement.classList.remove('has-error', 'has-success')
 
 });
 

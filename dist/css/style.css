@@ -58,3 +58,15 @@
   color: #fff;
   text-decoration: underline;
 }
+
+.campo_vacio {
+  border-color: red;
+}
+
+.oculta_campo {
+  display: none;
+}
+
+.muestra_campo {
+  display: block;
+}

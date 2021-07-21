@@ -15,10 +15,10 @@
                <div class="form-group">
                   <input type="hidden" id="id_actividad_update">
                   <label>Orden de la actividad:</label>
-                  <input type="number" maxlength="3" id="orden_actividad" class="form-control">
+                  <input type="number" maxlength="3" id="orden_actividad" class="form-control" title="Orden de la actividad">
                   <br>
                   <label>Descripción de la actividad:</label>
-                  <textarea maxlength="255" name="de_actividad" id="de_actividad" class="form-control" required></textarea>
+                  <textarea maxlength="255" name="de_actividad" id="de_actividad" class="form-control" required  title="Descripción de la actividad"></textarea>
                </div>
             </div>
          </div>

@@ -80,8 +80,6 @@ function guardaResponsables(id_proceso, array_responsables)
             {
                console.log('responsables guardados');
             }
-            else
-            alert('EEEEEE');
         })
 }
 function guardaIndicadores(id_proceso, array_indicadores)
@@ -102,8 +100,6 @@ function guardaIndicadores(id_proceso, array_indicadores)
             {
                console.log('indicadores guardados');
             }
-            else
-            alert(res);
         })
 }
 function guardaProcesosRelacionados(id_proceso, array_procesos)
@@ -124,8 +120,6 @@ function guardaProcesosRelacionados(id_proceso, array_procesos)
             {
                console.log('procesos relacionados guardados');
             }
-            else
-            alert(res);
         })
 }
 function getData(id)
