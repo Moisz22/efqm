@@ -11,14 +11,14 @@
             </div>
          </div>
          <div class="modal-body" id="modal_add_body">
-            <div id="alta_tarjetaCredito" class="form-medium">
+            <div class="form-medium">
                <div class="form-group">
                   <input type="hidden" id="id_tipo_documento_update">
                   <label>Descripción del tipo de documento:</label>
-                  <textarea maxlength="255" name="de_tipo_documento" id="de_tipo_documento" class="form-control" required></textarea>
+                  <textarea maxlength="255" name="de_tipo_documento" id="de_tipo_documento" class="form-control" required title="Descripción del tipo de documento"></textarea>
                   <br>
                   <label>Abreviatura del tipo de documento:</label>
-                  <input maxlength="10" type="text" class="form-control" id="abreviatura_tipo_documento" required>
+                  <input maxlength="10" type="text" class="form-control" id="abreviatura_tipo_documento" required title="Abreviatura del tipo de documento">
                </div>
             </div>
          </div>

@@ -11,23 +11,23 @@
             </div>
          </div>
          <div class="modal-body" id="modal_add_body">
-            <div id="alta_tarjetaCredito" class="form-medium">
+            <div class="form-medium">
                <div class="form-group">
                   <input type="hidden" id="id_persona_update">
                   <label>Identificación:</label>
-                  <input type="text" class="form-control" id="identificacion_persona">
+                  <input type="text" class="form-control" id="identificacion_persona" maxlength="11" title="Identificación">
                   <br>
-                  <label>Nombre:</label>
-                  <input type="text" class="form-control" id="nombre_persona">
+                  <label>Nombres:</label>
+                  <input type="text" class="form-control" id="nombre_persona" maxlength="255" title="Nombres">
                   <br>
-                  <label>Apellido:</label>
-                  <input type="text" class="form-control" id="apellido_persona">
+                  <label>Apellidos:</label>
+                  <input type="text" class="form-control" id="apellido_persona" maxlength="255" title="Apellidos">
                   <br>
                   <label>Nombre para impresión:</label>
-                  <input type="text" class="form-control" id="impresion_persona">
+                  <input type="text" class="form-control" id="impresion_persona" maxlength="255" title="Nombre para impresión">
                   <br>
                   <label>Cargo:</label>
-                  <select  id="id_cargo" class="form-control">
+                  <select  id="id_cargo" class="form-control" title="Cargo">
                      <option value="">Seleccione...</option>
                      <?php foreach($comboCargo as $row): ?>
                         <option value="<?php echo $row->id_cargo; ?>"><?php echo $row->descripcion_cargo; ?></option>

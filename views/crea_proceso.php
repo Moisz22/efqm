@@ -16,6 +16,18 @@
   $comboResponsable = $rmodel->searchTableWhere('cargo', 'jefe_cargo', 0);
   $comboTipoDocumento = $rmodel->searchTable('tipo_documento');
   $comboRecurso = $rmodel->searchTable('recurso');
+  $comboResponsableSubactividad = $rmodel->searchTable('cargo');
+  if (isset($_GET['id']))
+  {
+    $id = $_GET['id'];
+    $display = 'block';
+    $datoProceso = $rmodel->searchTableWhere('proceso', 'id_proceso', $id);
+  }
+  else
+  {
+    $id = '';
+    $display = 'none';
+  }
   ?>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -43,30 +55,30 @@
             <div id="tabs" name="tabs" class="nav-tabs-custom">
               <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab1" data-toggle="tab" onClick=""><span class="fa fa-clipboard"></span> Datos Generales</a></li>
-                <li class="mostrarOpcion" style="display: block;"><a href="#tab2" data-toggle="tab" onClick=""><span class="fa fa-users"></span> Actividades</a></li>
-                <li class="mostrarOpcion" style="display: block;"><a href="#tab3" data-toggle="tab" onClick=""><span class="fas fa-arrow-up"></span> Sub actividades:</a></li>
-                <li class="mostrarOpcion" style="display: block;"><a href="#tab4" data-toggle="tab" onClick=""><span class="fas fa-arrow-up"></span> Entradas:</a></li>
-                <li class="mostrarOpcion" style="display: block;"><a href="#tab5" data-toggle="tab" onClick=""><span class="fas fa-arrow-down"></span> Salidas:</a></li>
-                <li class="mostrarOpcion" style="display: block;"><a href="#tab6" data-toggle="tab" onClick=""><span class="fa fa-lightbulb-o"></span> Políticas</a></li>
-                <li class="mostrarOpcion" style="display: block;"><a href="#tab7" data-toggle="tab" onClick=""><span class="far fa-folder-open"></span> Anexos</a></li>
-                <li class="mostrarOpcion" style="display: block;"><a href="#tab8" data-toggle="tab" onClick=""><i class="fas fa-exchange-alt"></i></span> Control de cambios</a></li>
-                <li class="mostrarOpcion" style="display: block;"><a href="#tab9" data-toggle="tab" onClick=""><i class="fas fa-archive"></i></span> Recursos</a></li>
+                <li class="mostrarOpcion" style="display: <?php echo $display; ?>;"><a href="#tab2" data-toggle="tab" onClick=""><span class="fa fa-users"></span> Actividades</a></li>
+                <li class="mostrarOpcion" style="display: <?php echo $display; ?>;"><a href="#tab3" data-toggle="tab" onClick=""><i class="fas fa-tasks"></i> Sub actividades:</a></li>
+                <li class="mostrarOpcion" style="display: <?php echo $display; ?>;"><a href="#tab4" data-toggle="tab" onClick=""><span class="fas fa-arrow-up"></span> Entradas:</a></li>
+                <li class="mostrarOpcion" style="display: <?php echo $display; ?>;"><a href="#tab5" data-toggle="tab" onClick=""><span class="fas fa-arrow-down"></span> Salidas:</a></li>
+                <li class="mostrarOpcion" style="display: <?php echo $display; ?>;"><a href="#tab6" data-toggle="tab" onClick=""><span class="fa fa-lightbulb-o"></span> Políticas</a></li>
+                <li class="mostrarOpcion" style="display: <?php echo $display; ?>;"><a href="#tab7" data-toggle="tab" onClick=""><span class="far fa-folder-open"></span> Anexos</a></li>
+                <li class="mostrarOpcion" style="display: <?php echo $display; ?>;"><a href="#tab8" data-toggle="tab" onClick=""><i class="fas fa-exchange-alt"></i></span> Control de cambios</a></li>
+                <li class="mostrarOpcion" style="display: <?php echo $display; ?>;"><a href="#tab9" data-toggle="tab" onClick=""><i class="fas fa-archive"></i></span> Recursos</a></li>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="tab1" name="tab1">
                   <div class="row">
-                    <input type="hidden" id="id_proceso" value="1">
+                    <input type="text" id="id_proceso" value="<?php echo $id; ?>">
                     <div class="form-group col-md-6">
                       <label>Nombre del Proceso: </label>      
-                      <input type="text" id="nombre_proceso"  style="width: 100%;" class="form-control" required />
+                      <input type="text" value="<?php echo $nombre; ?>" id="nombre_proceso"  style="width: 100%;" class="form-control" required title="Nombre del Proceso">
                     </div>
                     <div class="form-group col-md-6">
                       <label>Abreviatura del Proceso: </label>      
-                      <input type="text" id="abreviatura_proceso"  style="width: 100%;" class="form-control" required />
+                      <input type="text" id="abreviatura_proceso"  style="width: 100%;" class="form-control" required title="Abreviatura del Proceso">
                     </div>
                     <div class="form-group col-md-6">
                       <label>Tipo de Proceso: </label>      
-                      <select class="form-control" id="tipo_proceso">
+                      <select class="form-control" id="tipo_proceso" title="Tipo de Proceso">
                         <option value="">Seleccione...</option>
                         <?php foreach($comboTipoProceso as $row): ?>
                         <option value="<?php echo $row->id_tipo_proceso; ?>"><?php echo $row->descripcion_tipo_proceso; ?></option>
@@ -74,8 +86,8 @@
                       </select>
                     </div>
                     <div class="form-group col-md-6">
-                      <label>Propietario</label>
-                      <select class="form-control" required id="propietario" name="propietario">
+                      <label>Propietario: </label>
+                      <select class="form-control" required id="propietario" name="propietario" title="Propietario">
                         <option value="">Seleccione...</option>
                         <?php foreach($comboPropietario as $row): ?>
                         <option value="<?php echo $row->id_cargo; ?>"><?php echo $row->descripcion_cargo; ?></option>
@@ -83,8 +95,8 @@
                       </select>
                     </div>
                     <div class="form-group col-md-6">
-                      <label>Version</label>
-                      <select class="form-control" required id="version" name="version">
+                      <label>Versión: </label>
+                      <select class="form-control" required id="version" name="version" title="Versión">
                         <option value="">Seleccione...</option>
                         <?php foreach($comboVersion as $row): ?>
                         <option value="<?php echo $row->id_version; ?>"><?php echo $row->descripcion_version; ?></option>
@@ -93,12 +105,15 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label>Fecha de elaboración: </label>      
-                      <input type="date" id="fecha_elaboracion" style="width: 100%;" required class="form-control">
+                      <input type="date" id="fecha_elaboracion" style="width: 100%;" required class="form-control" title="Fecha de elaboración">
                     </div>
                     <div class="form-group col-md-6">
                       <label>Objetivo: </label>      
-                      <textarea id="objetivo" name="objetivo" class="form-control"></textarea>
+                      <textarea id="objetivo" name="objetivo" class="form-control" title="Objetivo"></textarea>
                     </div>
+                    <div class="form-group col-md-6">
+                      <label>Alcance:</label>
+                      <textarea id="alcance" name="alcance" class="form-control" title="Alcance"></textarea>                    </div>
                     <div class="form-group col-md-6">
                       <label>Responsables: </label>      
                       <select class="form-control select2 invi_int" style="width: 100%;" multiple="multiple" id="responsables" name="responsables[]" data-placeholder="Seleccione...">
@@ -117,6 +132,8 @@
                         <?php endforeach; ?>
                       </select>
                     </div>
+                    </div> 
+                    <div class="row">
                     <div class="form-group col-md-6">
                       <label>Procesos relacionados: </label>      
                       <select class="form-control select2 invi_int" style="width: 100%;" multiple="multiple" id="procesos_relacionados" name="procesos_relacionados[]" data-placeholder="Seleccione...">
@@ -126,9 +143,10 @@
                         <?php endforeach; ?>
                       </select>
                     </div>
-                  </div>
-                  <label>Alcance:</label>
-                  <textarea id="alcance" name="alcance" class="form-control"></textarea>
+                    </div>    
+                    
+                  
+                  
                 </div>
                 <div class="tab-pane" id="tab2" name="tab2">
                   <div class="row">
@@ -141,6 +159,7 @@
                 <div class="tab-pane" id="tab3" name="tab3">
                   <div class="row">
                     <div class="col-md-12">
+                <a data-toggle="modal" class="btn btn-success" href="#modal-default-subactividad"><i class="fa fa-plus"></i></a><br><br>
                       <div class="records_subactividades"></div>
                     </div>
                   </div>
@@ -234,6 +253,7 @@
   include 'static/footer.php';
   include 'components/modalCargando.php';
   include 'components/modalActividad.php';
+  include 'components/modalSubactividad.php';
   include 'components/modalEntrada.php';
   include 'components/modalSalida.php';
   include 'components/modalPolitica.php';
@@ -241,7 +261,6 @@
   include 'components/modalAnexoProceso.php';
   include 'components/modalRecursoProceso.php';
   ?>
-<script type="text/javascript" src="../dist/js/core.js"></script>
 <script type="text/javascript" src="../dist/js/proceso.js"></script>
 <script type="text/javascript" src="../dist/js/control_cambio.js"></script>
 <script type="text/javascript" src="../dist/js/actividad.js"></script>

@@ -5,6 +5,7 @@
   include "static/header.php";
   include "static/aside.php";
   include '../models/PersonaModel.php';
+  include '../controllers/PersonaController.php';
   $rmodel = new PersonaModel;
   $resultados = $rmodel->consulta();
   $comboCargo = $rmodel->searchTable('cargo');

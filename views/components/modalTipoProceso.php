@@ -11,14 +11,14 @@
             </div>
          </div>
          <div class="modal-body" id="modal_add_body">
-            <div id="alta_tarjetaCredito" class="form-medium">
+            <div class="form-medium">
                <div class="form-group">
                   <input type="hidden" id="id_tipo_proceso_update">
                   <label>Descripción del tipo de proceso:</label>
-                  <textarea maxlength="50" name="de_tipo_proceso" id="de_tipo_proceso" class="form-control" required></textarea>
+                  <textarea maxlength="50" name="de_tipo_proceso" id="de_tipo_proceso" class="form-control" title="Descripción del tipo de proceso" required></textarea>
                   <br>
                   <label>Abreviatura del tipo de proceso:</label>
-                  <input maxlength="3" type="text" class="form-control" id="abreviatura_tipo_proceso" required>
+                  <input maxlength="3" type="text" class="form-control" id="abreviatura_tipo_proceso" title="Abreviatura del tipo de proceso" required>
                </div>
             </div>
          </div>

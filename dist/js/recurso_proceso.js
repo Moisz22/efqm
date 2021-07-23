@@ -143,8 +143,7 @@ $(modal_recurso_proceso).on('hidden.bs.modal', function () {
     $("#id_actividad_recurso_proceso").val('');
     $("#id_recurso").val('');
 
-    let elementos = [...document.querySelectorAll('.campo_vacio')]
-    elementos.map( e => e.classList.remove('campo_vacio') )
+    quitarErrorValidacion()
 });
 
 $(document).ready(function() {

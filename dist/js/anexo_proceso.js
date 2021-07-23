@@ -151,8 +151,7 @@ $(modal_anexo_proceso).on('hidden.bs.modal', function () {
     $("#id_actividad_anexo_proceso").val('');
     $("#descripcion_anexo_proceso").val('');
 
-    let elementos = [...document.querySelectorAll('.campo_vacio')]
-    elementos.map( e => e.classList.remove('campo_vacio') )
+    quitarErrorValidacion()
 });
 
 $(document).ready(function() {

@@ -21,24 +21,7 @@ function obtenerTablaControlCambio()
     })
 }
 
-/* function llenarComboControlCambio() 
-{
-    let id_proceso = $("#id_proceso").val();
-    let form_registro = new FormData;
-    form_registro.append('id_proceso', id_proceso);
-    form_registro.append('action', 'llenarComboControlCambio');
-
-    fetch(url_control_cambio, {
-
-        method: 'post', 
-        body: form_registro
-
-    }).then( res => res.text())
-    .then( res => {  
-        cargaComboVersion.map( e=> e.innerHTML = res)
-    })
-} */
- function agregarControlCambio()
+function agregarControlCambio()
 {
     let id_version = document.getElementById('id_control_cambio_version')
     let de_control_cambio = document.getElementById("de_control_cambio");
@@ -162,15 +145,11 @@ $(modal_control_cambio).on('hidden.bs.modal', function () {
     document.getElementById('leyendaEditarControlCambio').style.display = 'none';
     document.getElementById('buttonGuardarControlCambio').style.display = 'block';
     document.getElementById('buttonActualizarControlCambio').style.display = 'none';
-    /* $("#de_actividad").val('');
-    $("#orden_actividad").val(''); */
-
-    let elementos = [...document.querySelectorAll('.campo_vacio')]
-    elementos.map( e => e.classList.remove('campo_vacio') )
-
+    $('#de_control_cambio').val('');
+    $('#id_control_cambio_version').val('');
+    quitarErrorValidacion()
 }); 
 
 $(document).ready(function() {
     obtenerTablaControlCambio();
-    /* llenarComboControlCambio(); */
 } );

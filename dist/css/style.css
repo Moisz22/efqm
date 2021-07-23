@@ -70,3 +70,7 @@
 .muestra_campo {
   display: block;
 }
+
+.pointer {
+  cursor: pointer;
+}

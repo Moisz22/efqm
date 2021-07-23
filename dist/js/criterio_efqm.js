@@ -1,28 +1,35 @@
+let url = '../controllers/CriterioEfqmController.php'
+let label = 'criterio EFQM';
+let capitalize_label = label.charAt(0).toUpperCase() + label.slice(1)
+
 function agregar()
 {
-    let descripcion = $("#de_criterio_efqm").val();
-    let abreviatura = $("#abreviatura_criterio_efqm").val();
+    let descripcion = document.getElementById('de_criterio_efqm');
+    let abreviatura = document.getElementById('abreviatura_criterio_efqm');
     let form_registro = new FormData;
-    form_registro.append('descripcion', descripcion);
-    form_registro.append('abreviatura', abreviatura);
+    form_registro.append('descripcion', descripcion.value);
+    form_registro.append('abreviatura', abreviatura.value);
     form_registro.append('action', 'guardar');
+    let validacion = validarCampos([descripcion, abreviatura]);
+    if(validacion==true)
+    {
+        fetch(url, {
 
-    fetch('../models/CriterioEfqmModel.php', {
+            method: 'post', 
+            body: form_registro
 
-        method: 'post', 
-        body: form_registro
-
-    }).then( res => res.text())
-    .then( res => {  
-        if(res=='ok')
-        {
-            $.notification.show('success','Criterio EFQM creado correctamente!');
-            $("#modal-default").modal("hide");
-            setTimeout('document.location.reload()',1000);
-        }
-        else
-            $.notification.show('error','Error al crear el criterio EFQM!');
-    })
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success',`${capitalize_label} creado correctamente!`);
+                $("#modal-default").modal("hide");
+                setTimeout('document.location.reload()',1000);
+            }
+            else
+                $.notification.show('error',`Error al crear el ${label}!`);
+        })
+    }
 }
 
 function getData(id)
@@ -31,7 +38,7 @@ function getData(id)
     form_registro.append('id_criterio_efqm', id);
     form_registro.append('action', 'find');
 
-    fetch('../models/CriterioEfqmModel.php', {
+    fetch(url, {
 
         method: 'post', 
         body: form_registro
@@ -60,7 +67,7 @@ function actualizar()
     form_registro.append('abreviatura', abreviatura);
     form_registro.append('action', 'actualizar');
 
-    fetch('../models/CriterioEfqmModel.php', {
+    fetch(url, {
 
         method: 'post', 
         body: form_registro
@@ -69,25 +76,25 @@ function actualizar()
     .then( res => {  
         if(res=='ok')
         {
-            $.notification.show('success','Criterio EFQM actualizado correctamente!');
+            $.notification.show('success',`${capitalize_label} actualizado correctamente!`);
             $("#modal-default").modal("hide");
             setTimeout('document.location.reload()',1000);
         }
         else
-            $.notification.show('error','Error al actualizar el criterio EFQM!'+res);
+            $.notification.show('error',`Error al actualizar el ${label}!`);
     })
 }
 
 function eliminar(id_criterio_efqm)
 {
-    let conf = confirm("Desea eliminar este criterio EFQM?");
+    let conf = confirm(`Desea eliminar este ${label}?`);
     if (conf == true)
     {
         let form_registro = new FormData;
         form_registro.append('id_criterio_efqm', id_criterio_efqm);
         form_registro.append('action', 'eliminar');
 
-        fetch('../models/CriterioEfqmModel.php', {
+        fetch(url, {
 
             method: 'post', 
             body: form_registro
@@ -96,12 +103,12 @@ function eliminar(id_criterio_efqm)
         .then( res => {  
             if(res=='ok')
             {
-                $.notification.show('success','Criterio EFQM eliminado correctamente!');
+                $.notification.show('success',`${capitalize_label} eliminado correctamente!`);
                 $("#modal-default").modal("hide");
                 setTimeout('document.location.reload()',1000);
             }
             else
-                $.notification.show('error','Error al eliminar el criterio EFQM!');
+                $.notification.show('error',`Error al eliminar el ${label}!`);
         })
     }
 }
@@ -113,4 +120,5 @@ $("#modal-default").on('hidden.bs.modal', function () {
     document.getElementById('buttonActualizar').style.display = 'none';
     $("#de_criterio_efqm").val('');
     $("#abreviatura_criterio_efqm").val('');
+    quitarErrorValidacion();
 });

@@ -11,11 +11,11 @@
             </div>
          </div>
          <div class="modal-body" id="modal_add_body">
-            <div id="alta_tarjetaCredito" class="form-medium">
+            <div  class="form-medium">
                <div class="form-group">
                   <input type="hidden" id="id_cargo_update">
                   <label>Descripción del cargo:</label>
-                  <textarea maxlength="60" name="de_cargo" id="de_cargo" class="form-control" required></textarea>
+                  <textarea maxlength="60" name="de_cargo" id="de_cargo" class="form-control" title="Descripción del cargo" required></textarea>
                   <br>
                   <label>Jefe: <input type="checkbox" id="jefe_cargo"></label>
                </div>

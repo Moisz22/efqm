@@ -60,7 +60,7 @@
   ?>
 <?php
   include 'components/modalVersion.php';
-  ?>
+?>
 <script type="text/javascript" src="../dist/js/version.js"></script>
 <script type="text/javascript" src="../dist/js/jquery.notification.js"></script>
 <script>

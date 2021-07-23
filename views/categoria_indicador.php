@@ -5,6 +5,7 @@
   include "static/header.php";
   include "static/aside.php";
   include '../models/CategoriaIndicadorModel.php';
+  include '../controllers/CategoriaIndicadorController.php';
   $rmodel = new CategoriaIndicadorModel;
   $resultados = $rmodel->all();
 ?>

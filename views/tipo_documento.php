@@ -5,6 +5,7 @@
   include "static/header.php";
   include "static/aside.php";
   include '../models/TipoDocumentoModel.php';
+  include '../controllers/TipoDocumentoController.php';
   $rmodel = new TipoDocumentoModel;
   $resultados = $rmodel->all();
 ?>

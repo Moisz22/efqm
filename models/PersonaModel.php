@@ -17,29 +17,3 @@ class PersonaModel extends Model{
         return $stm->fetchAll(PDO::FETCH_OBJ);
     }
 }
-
-$PersonaModel = new PersonaModel();
-
-if(isset($_POST['action']))
-{
-    $action = $_POST['action'];
-    switch ($action)
-    {
-        case 'guardar':
-            $PersonaModel->$action(['dni_persona' => $_POST['identificacion_persona'], 'nombre_persona' => $_POST['nombre_persona'], 'apellido_persona' => $_POST['apellido_persona'], 'impresion_persona' => $_POST['impresion_persona'], 'id_cargo' => $_POST['id_cargo'], 'flag_empleado' => $_POST['flag_empleado'] ]);
-            break;
-            
-        case 'find':
-            $PersonaModel->$action($_POST['id_persona']);
-            break;
-
-        case 'actualizar':
-            $PersonaModel->$action(['dni_persona' => $_POST['identificacion_persona'], 'nombre_persona' => $_POST['nombre_persona'], 'apellido_persona' => $_POST['apellido_persona'], 'impresion_persona' => $_POST['impresion_persona'], 'id_cargo' => $_POST['id_cargo'], 'flag_empleado' => $_POST['flag_empleado'] ], $_POST['id_persona']);
-            break;
-
-        case 'eliminar':
-            $PersonaModel->$action($_POST['id_persona']);
-            break;
-    }
-    
-}

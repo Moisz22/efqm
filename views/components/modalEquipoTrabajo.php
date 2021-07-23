@@ -15,7 +15,7 @@
                <div class="form-group">
                   <input type="hidden" id="id_equipo_trabajo_update">
                   <label>Descripción del equipo de trabajo:</label>
-                  <textarea maxlength="50" name="de_equipo_trabajo" id="de_equipo_trabajo" class="form-control" required></textarea>
+                  <textarea maxlength="50" name="de_equipo_trabajo" id="de_equipo_trabajo" class="form-control" title="Descripción del equipo de trabajo" required></textarea>
                </div>
             </div>
          </div>

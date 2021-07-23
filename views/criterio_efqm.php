@@ -5,6 +5,7 @@
   include "static/header.php";
   include "static/aside.php";
   include '../models/CriterioEfqmModel.php';
+  include '../controllers/CriterioEfqmController.php';
   $rmodel = new CriterioEfqmModel;
   $resultados = $rmodel->all();
 ?>

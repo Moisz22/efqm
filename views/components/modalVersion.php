@@ -11,11 +11,11 @@
             </div>
          </div>
          <div class="modal-body" id="modal_add_body">
-            <div id="alta_tarjetaCredito" class="form-medium">
+            <div class="form-medium">
                <div class="form-group">
                   <input type="hidden" id="id_version_update">
-                  <label>Descripción del versión:</label>
-                  <textarea maxlength="10" name="de_version" id="de_version" class="form-control" required></textarea>
+                  <label>Descripción de la versión:</label>
+                  <textarea maxlength="10" name="de_version" id="de_version" class="form-control" title="Descripción de la versión" required></textarea>
                </div>
             </div>
          </div>

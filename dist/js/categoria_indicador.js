@@ -1,30 +1,33 @@
-let url = '../models/CategoriaIndicadorModel.php'
+let url = '../controllers/CategoriaIndicadorController.php'
 let label = 'categoria indicador'
 let capitalize_label = label.charAt(0).toUpperCase() + label.slice(1)
 
 function agregar()
 {
-    let descripcion = $("#de_categoria_indicador").val();
+    let descripcion = document.getElementById('de_categoria_indicador');
     let form_registro = new FormData;
-    form_registro.append('descripcion', descripcion);
+    form_registro.append('descripcion', descripcion.value);
     form_registro.append('action', 'guardar');
+    let validacion = validarCampos([descripcion]);
+    if(validacion==true)
+    {
+        fetch(url, {
 
-    fetch(url, {
+            method: 'post', 
+            body: form_registro
 
-        method: 'post', 
-        body: form_registro
-
-    }).then( res => res.text())
-    .then( res => {  
-        if(res=='ok')
-        {
-            $.notification.show('success',`${capitalize_label} creada correctamente!`);
-            $("#modal-default").modal("hide");
-            setTimeout('document.location.reload()',1000);
-        }
-        else
-            $.notification.show('error',`Error al crear la ${label}`);
-    })
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success',`${capitalize_label} creada correctamente!`);
+                $("#modal-default").modal("hide");
+                setTimeout('document.location.reload()',1000);
+            }
+            else
+                $.notification.show('error',`Error al crear la ${label}`);
+        })
+    }
 }
 
 function getData(id)
@@ -53,28 +56,31 @@ function getData(id)
 function actualizar()
 {
     let id_categoria_indicador = $("#id_categoria_indicador_update").val();
-    let descripcion = $("#de_categoria_indicador").val();
+    let descripcion = document.getElementById('de_categoria_indicador');
     let form_registro = new FormData;
-    form_registro.append('descripcion', descripcion);
+    form_registro.append('descripcion', descripcion.value);
     form_registro.append('id_categoria_indicador', id_categoria_indicador);
     form_registro.append('action', 'actualizar');
+    let validacion = validarCampos([descripcion]);
+    if(validacion==true)
+    {
+        fetch(url, {
 
-    fetch(url, {
+            method: 'post', 
+            body: form_registro
 
-        method: 'post', 
-        body: form_registro
-
-    }).then( res => res.text())
-    .then( res => {  
-        if(res=='ok')
-        {
-            $.notification.show('success',`${capitalize_label} actualizado correctamente!`);
-            $("#modal-default").modal("hide");
-            setTimeout('document.location.reload()',1000);
-        }
-        else
-            $.notification.show('error',`Error al actualizar la ${label}`);
-    })
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success',`${capitalize_label} actualizada correctamente!`);
+                $("#modal-default").modal("hide");
+                setTimeout('document.location.reload()',1000);
+            }
+            else
+                $.notification.show('error',`Error al actualizar la ${label}`);
+        })
+    }
 }
 
 function eliminar(id_categoria_indicador)
@@ -111,4 +117,5 @@ $("#modal-default").on('hidden.bs.modal', function () {
     document.getElementById('buttonGuardar').style.display = 'block';
     document.getElementById('buttonActualizar').style.display = 'none';
     $("#de_categoria_indicador").val('');
+    quitarErrorValidacion();
 });

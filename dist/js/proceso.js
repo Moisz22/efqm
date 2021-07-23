@@ -7,14 +7,15 @@ const mostrarOpcion = [...document.querySelectorAll('.mostrarOpcion')]
 
 function agregar()
 {
-    let nombre_proceso = $("#nombre_proceso").val();
-    let abreviatura_proceso = $("#abreviatura_proceso").val();
-    let tipo_proceso = $("#tipo_proceso").val();
-    let propietario = $("#propietario").val();
-    let version = $("#version").val();
-    let fecha_elaboracion = $("#fecha_elaboracion").val();
-    let objetivo = $("#objetivo").val();
-    let alcance = $("#alcance").val();
+    let nombre_proceso = document.getElementById('nombre_proceso');
+    let abreviatura_proceso = document.getElementById('abreviatura_proceso');
+    let tipo_proceso = document.getElementById('tipo_proceso');
+    let propietario = document.getElementById('propietario');
+    let version = document.getElementById('version');
+    let fecha_elaboracion = document.getElementById('fecha_elaboracion');
+    let objetivo = document.getElementById('objetivo');
+    let alcance = document.getElementById('alcance');
+
     let responsables = [];
     $("select[name='responsables[]'] option:selected").each(function(){
         responsables.push($(this).val());
@@ -31,36 +32,48 @@ function agregar()
     });
       
     let form_registro = new FormData;
-    form_registro.append('nombre_proceso', nombre_proceso);
-    form_registro.append('abreviatura_proceso', abreviatura_proceso);
-    form_registro.append('tipo_proceso', tipo_proceso);
-    form_registro.append('propietario', propietario);
-    form_registro.append('version', version);
-    form_registro.append('fecha_elaboracion', fecha_elaboracion);
-    form_registro.append('objetivo', objetivo);
-    form_registro.append('alcance', alcance);
+    form_registro.append('nombre_proceso', nombre_proceso.value);
+    form_registro.append('abreviatura_proceso', abreviatura_proceso.value);
+    form_registro.append('tipo_proceso', tipo_proceso.value);
+    form_registro.append('propietario', propietario.value);
+    form_registro.append('version', version.value);
+    form_registro.append('fecha_elaboracion', fecha_elaboracion.value);
+    form_registro.append('objetivo', objetivo.value);
+    form_registro.append('alcance', alcance.value);
     form_registro.append('action', 'guardarProceso');
-    fetch(url, {
-        method: 'post', 
-        body: form_registro
+    let validacion = validarCampos([nombre_proceso, abreviatura_proceso, tipo_proceso, propietario, version, fecha_elaboracion, objetivo, alcance]);
+    if(validacion==true)
+    {
+        fetch(url, {
+            method: 'post', 
+            body: form_registro
 
-    }).then( res => res.text())
-    .then( res => {
-        let array = res.split("_");
-        if(array[0]=='ok')
-        {
-            $.notification.show('success',`${capitalize_label} creado correctamente!`);
-            mostrarOpcion.map( e=> e.style.display = 'block' )
-            $("#id_proceso").val(array[1]);
-            guardaResponsables(array[1],JSON.stringify(responsables));
-            guardaIndicadores(array[1],JSON.stringify(indicador));
-            guardaProcesosRelacionados(array[1],JSON.stringify(procesos_relacionados));
-            $('#btn_guardar').attr('onclick', '');
-        }
-        else $.notification.show('error',`Error al crear el ${label}!`);
+        }).then( res => res.text())
+        .then( res => {
+            let array = res.split("_");
+            if(array[0]=='ok')
+            {
+                $.notification.show('success',`${capitalize_label} creado correctamente!`);
+                mostrarOpcion.map( e=> e.style.display = 'block' )
+                $("#id_proceso").val(array[1]);
+                guardaResponsables(array[1],JSON.stringify(responsables));
+                guardaIndicadores(array[1],JSON.stringify(indicador));
+                guardaProcesosRelacionados(array[1],JSON.stringify(procesos_relacionados));
+                $('#btn_guardar').attr('onclick', '');
+                obtenerTablaActividad();
+                obtenerAcordeon();
+                obtenerTablaEntrada();
+                obtenerTablaSalida();
+                obtenerTablaPolitica();
+                obtenerTablaAnexoProceso();
+                obtenerTablaControlCambio();
+                obtenerTablaRecursoProceso();
+            }
+            else $.notification.show('error',`Error al crear el ${label}!`);
 
-        $("#modal-default-cargando").modal("hide");
-    })
+            $("#modal-default-cargando").modal("hide");
+        })
+    }
 }
 function guardaResponsables(id_proceso, array_responsables)
 {

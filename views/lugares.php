@@ -5,6 +5,7 @@
   include "static/header.php";
   include "static/aside.php";
   include '../models/LugarModel.php';
+  include '../controllers/LugarController.php';
   $rmodel = new LugarModel;
   $resultados = $rmodel->all();
 ?>

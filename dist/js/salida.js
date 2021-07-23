@@ -23,30 +23,37 @@ function obtenerTablaSalida()
 
 function agregarSalida()
 {
-    let descripcion_salida = $("#descripcion_salida").val();
-    let id_proceso = $("#id_proceso").val();
-    let id_actividad = $("#id_actividad_salida").val();
+    let descripcion_salida = document.getElementById('descripcion_salida')
+    let id_proceso = document.getElementById('id_proceso')
+    let id_actividad = document.getElementById('id_actividad_salida')
     let form_registro = new FormData;
-    form_registro.append('id_actividad', id_actividad);
-    form_registro.append('id_proceso', id_proceso);
-    form_registro.append('descripcion_salida', descripcion_salida);
+    form_registro.append('id_actividad', id_actividad.value);
+    form_registro.append('id_proceso', id_proceso.value);
+    form_registro.append('descripcion_salida', descripcion_salida.value);
     form_registro.append('action', 'guardar');
 
-    fetch(url_salida, {
-        method: 'post', 
-        body: form_registro
+    let validacion = validarCampos([descripcion_salida, id_actividad])
 
-    }).then( res => res.text())
-    .then( res => {  
-        if(res=='ok')
-        {
-            $.notification.show('success',`${capitalize_label_salida} creada correctamente!`);
-            $(modal_salida).modal("hide");
-            obtenerTablaSalida();
-        }
-        else
-            $.notification.show('error',`Error al crear la ${res}!`);
-    })
+    if(validacion == true){
+
+        fetch(url_salida, {
+            method: 'post', 
+            body: form_registro
+
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success',`${capitalize_label_salida} creada correctamente!`);
+                $(modal_salida).modal("hide");
+                obtenerTablaSalida();
+            }
+            else
+                $.notification.show('error',`Error al crear la ${res}!`);
+        })
+
+    }
+
 }
 
 function getDataSalida(id)
@@ -76,31 +83,37 @@ function getDataSalida(id)
 
 function actualizarSalida()
 {
-    let id_salida = $("#id_salida_update").val();
-    let id_actividad_salida = $("#id_actividad_salida").val();
-    let descripcion_salida = $("#descripcion_salida").val();
+    let id_salida = document.getElementById('id_salida_update')
+    let id_actividad_salida = document.getElementById('id_actividad_salida')
+    let descripcion_salida = document.getElementById('descripcion_salida')
     let form_registro = new FormData;
-    form_registro.append('id_salida', id_salida);
-    form_registro.append('id_actividad_salida', id_actividad_salida);
-    form_registro.append('descripcion_salida', descripcion_salida);
+    form_registro.append('id_salida', id_salida.value);
+    form_registro.append('id_actividad_salida', id_actividad_salida.value);
+    form_registro.append('descripcion_salida', descripcion_salida.value);
     form_registro.append('action', 'actualizar');
 
-    fetch(url_salida, {
+    let validacion = validarCampos([id_salida,id_actividad_salida,descripcion_salida])
 
-        method: 'post', 
-        body: form_registro
+    if(validacion == true){
 
-    }).then( res => res.text())
-    .then( res => {  
-        if(res=='ok')
-        {
-            $.notification.show('success',`${capitalize_label_salida} actualizada correctamente!`);
-            $(modal_salida).modal("hide");
-            obtenerTablaSalida();
-        }
-        else
-            $.notification.show('error',`Error al actualizar el ${label_salida}!`);
-    })
+        fetch(url_salida, {
+
+            method: 'post', 
+            body: form_registro
+
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success',`${capitalize_label_salida} actualizada correctamente!`);
+                $(modal_salida).modal("hide");
+                obtenerTablaSalida();
+            }
+            else
+                $.notification.show('error',`Error al actualizar el ${label_salida}!`);
+        })
+
+    }
 }
 
 function eliminarSalida(id_salida)
@@ -138,6 +151,7 @@ $(modal_salida).on('hidden.bs.modal', function () {
     $("#id_salida_update").val('');
     $("#id_actividad_salida").val('');
     $("#descripcion_salida").val('');
+    quitarErrorValidacion()
 });
 
 $(document).ready(function() {

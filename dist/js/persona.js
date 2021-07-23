@@ -1,41 +1,46 @@
-let url = '../models/PersonaModel.php';
+let url = '../controllers/PersonaController.php';
+let label = 'persona';
+let capitalize_label = label.charAt(0).toUpperCase() + label.slice(1)
 
 function agregar()
 {
-    let identificacion_persona = $("#identificacion_persona").val();
-    let nombre_persona = $("#nombre_persona").val();
-    let apellido_persona = $("#apellido_persona").val();
-    let impresion_persona = $("#impresion_persona").val();
-    let id_cargo = $("#id_cargo").val();
+    let identificacion_persona = document.getElementById('identificacion_persona');
+    let nombre_persona = document.getElementById('nombre_persona');
+    let apellido_persona = document.getElementById('apellido_persona');
+    let impresion_persona = document.getElementById('impresion_persona');
+    let id_cargo = document.getElementById('id_cargo');
     let flag_empleado = '';
 
     flag_empleado = (document.getElementById('flag_empleado').checked) ? 0 : 1;
         
     let form_registro = new FormData;
-    form_registro.append('identificacion_persona', identificacion_persona);
-    form_registro.append('nombre_persona', nombre_persona);
-    form_registro.append('apellido_persona', apellido_persona);
-    form_registro.append('impresion_persona', impresion_persona);
-    form_registro.append('id_cargo', id_cargo);
+    form_registro.append('identificacion_persona', identificacion_persona.value);
+    form_registro.append('nombre_persona', nombre_persona.value);
+    form_registro.append('apellido_persona', apellido_persona.value);
+    form_registro.append('impresion_persona', impresion_persona.value);
+    form_registro.append('id_cargo', id_cargo.value);
     form_registro.append('flag_empleado', flag_empleado);
     form_registro.append('action', 'guardar');
+    let validacion = validarCampos([identificacion_persona, nombre_persona, apellido_persona, impresion_persona, id_cargo]);
+    if(validacion==true)
+    {
+        fetch(url, {
 
-    fetch(url, {
+            method: 'post', 
+            body: form_registro
 
-        method: 'post', 
-        body: form_registro
-
-    }).then( res => res.text())
-    .then( res => {  
-        if(res=='ok')
-        {
-            $.notification.show('success','Persona creada correctamente!');
-            $("#modal-default").modal("hide");
-            setTimeout('document.location.reload()',1000);
-        }
-        else
-            $.notification.show('error','Error al crear la persona!'+ res);
-    })
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success',`${capitalize_label} creada correctamente!`);
+                $("#modal-default").modal("hide");
+                setTimeout('document.location.reload()',1000);
+            }
+            else
+                $.notification.show('error',`Error al crear la ${label}!`);
+        })
+    }
 }
 
 function getData(id)
@@ -71,44 +76,47 @@ function getData(id)
 function actualizar()
 {
     let id_persona = $("#id_persona_update").val();
-    let identificacion_persona = $("#identificacion_persona").val();
-    let nombre_persona = $("#nombre_persona").val();
-    let apellido_persona = $("#apellido_persona").val();
-    let impresion_persona = $("#impresion_persona").val();
-    let id_cargo = $("#id_cargo").val();
+    let identificacion_persona = document.getElementById('identificacion_persona');
+    let nombre_persona = document.getElementById('nombre_persona');
+    let apellido_persona = document.getElementById('apellido_persona');
+    let impresion_persona = document.getElementById('impresion_persona');
+    let id_cargo = document.getElementById('id_cargo');
     let flag_empleado = '';
     flag_empleado = (document.getElementById('flag_empleado').checked) ? 0 : 1;
     let form_registro = new FormData;
     form_registro.append('id_persona', id_persona);
-    form_registro.append('identificacion_persona', identificacion_persona);
-    form_registro.append('nombre_persona', nombre_persona);
-    form_registro.append('apellido_persona', apellido_persona);
-    form_registro.append('impresion_persona', impresion_persona);
-    form_registro.append('id_cargo', id_cargo);
+    form_registro.append('identificacion_persona', identificacion_persona.value);
+    form_registro.append('nombre_persona', nombre_persona.value);
+    form_registro.append('apellido_persona', apellido_persona.value);
+    form_registro.append('impresion_persona', impresion_persona.value);
+    form_registro.append('id_cargo', id_cargo.value);
     form_registro.append('flag_empleado', flag_empleado);
     form_registro.append('action', 'actualizar');
+    let validacion = validarCampos([identificacion_persona, nombre_persona, apellido_persona, impresion_persona, id_cargo]);
+    if(validacion==true)
+    {
+        fetch(url, {
 
-    fetch(url, {
+            method: 'post', 
+            body: form_registro
 
-        method: 'post', 
-        body: form_registro
-
-    }).then( res => res.text())
-    .then( res => {  
-        if(res=='ok')
-        {
-            $.notification.show('success','Persona actualizada correctamente!');
-            $("#modal-default").modal("hide");
-            setTimeout('document.location.reload()',1000);
-        }
-        else
-            $.notification.show('error','Error al actualizar la persona!');
-    })
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success',`${capitalize_label} actualizada correctamente!`);
+                $("#modal-default").modal("hide");
+                setTimeout('document.location.reload()',1000);
+            }
+            else
+                $.notification.show('error',`Error al actualizar la ${label}!`);
+        })
+    }
 }
 
 function eliminar(id_persona)
 {
-    let conf = confirm("Desea eliminar esta persona?");
+    let conf = confirm(`Desea eliminar esta ${label}?`);
     if (conf == true)
     {
         let form_registro = new FormData;
@@ -124,12 +132,12 @@ function eliminar(id_persona)
         .then( res => {  
             if(res=='ok')
             {
-                $.notification.show('success','Persona eliminada correctamente!');
+                $.notification.show('success',`${capitalize_label} eliminada correctamente!`);
                 $("#modal-default").modal("hide");
                 setTimeout('document.location.reload()',1000);
             }
             else
-                $.notification.show('error','Error al eliminar la persona!');
+                $.notification.show('error',`Error al eliminar la ${label}!`);
         })
     }
 }
@@ -145,4 +153,5 @@ $("#modal-default").on('hidden.bs.modal', function () {
     $("#impresion_persona").val('');
     $("#id_cargo").val('');
     $("#flag_empleado").prop('checked', false); 
+    quitarErrorValidacion();
 });

@@ -5,7 +5,6 @@ require_once '../models/AnexoProcesoModel.php';
 class AnexoProcesoController{
 
     private $anexoProcesoModel;
-    private $tabla = 'anexo_proceso';
 
     public function __construct () {
         $this->anexoProcesoModel = new AnexoProcesoModel;

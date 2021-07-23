@@ -15,12 +15,12 @@
                <div class="form-group">
                <input type="hidden" id="id_salida_update">
                   <label>Actividad asociada:</label>
-                  <select  id="id_actividad_salida" class="form-control cbx_actividad">
+                  <select  id="id_actividad_salida" class="form-control cbx_actividad" title="Actividad asociada">
                      <option value="">Seleccione...</option>
                   </select>
                      <br>
                   <label>Descripción salida:</label>
-                  <textarea maxlength="255" name="descripcion_salida" id="descripcion_salida" class="form-control" required></textarea>
+                  <textarea maxlength="255" name="descripcion_salida" id="descripcion_salida" class="form-control" required title="Descripción salida"></textarea>
                </div>
             </div>
          </div>

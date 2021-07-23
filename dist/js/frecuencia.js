@@ -1,28 +1,33 @@
-let url = '../models/FrecuenciaModel.php'
+let url = '../controllers/FrecuenciaController.php'
+let label = 'frecuencia';
+let capitalize_label = label.charAt(0).toUpperCase() + label.slice(1)
 
 function agregar()
 {
-    let descripcion = $("#de_frecuencia").val();
+    let descripcion = document.getElementById('de_frecuencia');
     let form_registro = new FormData;
-    form_registro.append('descripcion', descripcion);
+    form_registro.append('descripcion', descripcion.value);
     form_registro.append('action', 'guardar');
+    let validacion = validarCampos([descripcion]);
+    if(validacion==true)
+    {
+        fetch(url, {
 
-    fetch(url, {
+            method: 'post', 
+            body: form_registro
 
-        method: 'post', 
-        body: form_registro
-
-    }).then( res => res.text())
-    .then( res => {  
-        if(res=='ok')
-        {
-            $.notification.show('success','Frecuencia creada correctamente!');
-            $("#modal-default").modal("hide");
-            setTimeout('document.location.reload()',1000);
-        }
-        else
-            $.notification.show('error','Error al crear la frecuencia!');
-    })
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success',`${capitalize_label} creada correctamente!`);
+                $("#modal-default").modal("hide");
+                setTimeout('document.location.reload()',1000);
+            }
+            else
+                $.notification.show('error',`Error al crear la ${label}!`);
+        })
+    }
 }
 
 function getData(id)
@@ -51,40 +56,15 @@ function getData(id)
 function actualizar()
 {
     let id_frecuencia = $("#id_frecuencia_update").val();
-    let descripcion = $("#de_frecuencia").val();
+    let descripcion = document.getElementById('de_frecuencia');
     let form_registro = new FormData;
-    form_registro.append('descripcion', descripcion);
+    form_registro.append('descripcion', descripcion.value);
     form_registro.append('id_frecuencia', id_frecuencia);
     form_registro.append('action', 'actualizar');
-
-    fetch(url, {
-
-        method: 'post', 
-        body: form_registro
-
-    }).then( res => res.text())
-    .then( res => {  
-        if(res=='ok')
-        {
-            $.notification.show('success','Frecuencia actualizada correctamente!');
-            $("#modal-default").modal("hide");
-            setTimeout('document.location.reload()',1000);
-        }
-        else
-            $.notification.show('error','Error al actualizar la frecuencia!');
-    })
-}
-
-function eliminar(id_frecuencia)
-{
-    let conf = confirm("Desea eliminar esta frecuencia?");
-    if (conf == true)
+    let validacion = validarCampos([descripcion]);
+    if(validacion==true)
     {
-        let form_registro = new FormData;
-        form_registro.append('id_frecuencia', id_frecuencia);
-        form_registro.append('action', 'eliminar');
-
-        fetch('../models/FrecuenciaModel.php', {
+        fetch(url, {
 
             method: 'post', 
             body: form_registro
@@ -93,12 +73,40 @@ function eliminar(id_frecuencia)
         .then( res => {  
             if(res=='ok')
             {
-                $.notification.show('success','Frecuencia eliminado correctamente!');
+                $.notification.show('success',`${capitalize_label} actualizada correctamente!`);
                 $("#modal-default").modal("hide");
                 setTimeout('document.location.reload()',1000);
             }
             else
-                $.notification.show('error','Error al eliminar la frecuencia!');
+                $.notification.show('error',`Error al actualizar la ${label}!`);
+        })
+    }
+}
+
+function eliminar(id_frecuencia)
+{
+    let conf = confirm(`Desea eliminar esta ${label}?`);
+    if (conf == true)
+    {
+        let form_registro = new FormData;
+        form_registro.append('id_frecuencia', id_frecuencia);
+        form_registro.append('action', 'eliminar');
+
+        fetch(url, {
+
+            method: 'post', 
+            body: form_registro
+
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success',`${capitalize_label} eliminado correctamente!`);
+                $("#modal-default").modal("hide");
+                setTimeout('document.location.reload()',1000);
+            }
+            else
+                $.notification.show('error',`Error al eliminar la ${label}!`);
         })
     }
 }
@@ -109,4 +117,6 @@ $("#modal-default").on('hidden.bs.modal', function () {
     document.getElementById('buttonGuardar').style.display = 'block';
     document.getElementById('buttonActualizar').style.display = 'none';
     $("#de_frecuencia").val('');
+    quitarErrorValidacion();
+
 });

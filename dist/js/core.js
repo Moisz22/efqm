@@ -19,3 +19,9 @@ function validarCampos(elementos) {
     return bandera
 
 }
+
+function quitarErrorValidacion()
+{
+    let elementos = [...document.querySelectorAll('.campo_vacio')]
+    elementos.map( e => e.classList.remove('campo_vacio') )
+}

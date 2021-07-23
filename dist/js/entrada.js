@@ -23,30 +23,36 @@ function obtenerTablaEntrada()
 
 function agregarEntrada()
 {
-    let descripcion_entrada = $("#descripcion_entrada").val();
+    let descripcion_entrada = document.getElementById('descripcion_entrada')
     let id_proceso = $("#id_proceso").val();
-    let id_actividad = $("#id_actividad_entrada").val();
+    let id_actividad = document.getElementById('id_actividad_entrada')
     let form_registro = new FormData;
-    form_registro.append('id_actividad', id_actividad);
+    form_registro.append('id_actividad', id_actividad.value);
     form_registro.append('id_proceso', id_proceso);
-    form_registro.append('descripcion_entrada', descripcion_entrada);
+    form_registro.append('descripcion_entrada', descripcion_entrada.value);
     form_registro.append('action', 'guardar');
 
-    fetch(url_entrada, {
-        method: 'post', 
-        body: form_registro
+    let validacion = validarCampos([descripcion_entrada, id_actividad])
 
-    }).then( res => res.text())
-    .then( res => {  
-        if(res=='ok')
-        {
-            $.notification.show('success',`${capitalize_label_entrada} creada correctamente!`);
-            $(modal_entrada).modal("hide");
-            obtenerTablaEntrada();
-        }
-        else
-            $.notification.show('error',`Error al crear la ${res}!`);
-    })
+    if(validacion == true){
+
+        fetch(url_entrada, {
+            method: 'post', 
+            body: form_registro
+
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success',`${capitalize_label_entrada} creada correctamente!`);
+                $(modal_entrada).modal("hide");
+                obtenerTablaEntrada();
+            }
+            else
+                $.notification.show('error',`Error al crear la ${res}!`);
+        })
+
+    }
 }
 
 function getDataEntrada(id)
@@ -76,31 +82,37 @@ function getDataEntrada(id)
 
 function actualizarEntrada()
 {
-    let id_entrada = $("#id_entrada_update").val();
-    let id_actividad_entrada = $("#id_actividad_entrada").val();
-    let descripcion_entrada = $("#descripcion_entrada").val();
+    let id_entrada = document.getElementById('id_entrada_update')
+    let id_actividad_entrada = document.getElementById('id_actividad_entrada')
+    let descripcion_entrada = document.getElementById('descripcion_entrada')
     let form_registro = new FormData;
-    form_registro.append('id_entrada', id_entrada);
-    form_registro.append('id_actividad_entrada', id_actividad_entrada);
-    form_registro.append('descripcion_entrada', descripcion_entrada);
+    form_registro.append('id_entrada', id_entrada.value);
+    form_registro.append('id_actividad_entrada', id_actividad_entrada.value);
+    form_registro.append('descripcion_entrada', descripcion_entrada.value);
     form_registro.append('action', 'actualizar');
 
-    fetch(url_entrada, {
+    let validacion = validarCampos([id_entrada, id_actividad_entrada, descripcion_entrada])
 
-        method: 'post', 
-        body: form_registro
+    if(validacion == true){
 
-    }).then( res => res.text())
-    .then( res => {  
-        if(res=='ok')
-        {
-            $.notification.show('success',`${capitalize_label_entrada} actualizada correctamente!`);
-            $(modal_entrada).modal("hide");
-            obtenerTablaEntrada();
-        }
-        else
-            $.notification.show('error',`Error al actualizar el ${label_entrada}!`);
-    })
+        fetch(url_entrada, {
+
+            method: 'post', 
+            body: form_registro
+
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success',`${capitalize_label_entrada} actualizada correctamente!`);
+                $(modal_entrada).modal("hide");
+                obtenerTablaEntrada();
+            }
+            else
+                $.notification.show('error',`Error al actualizar el ${label_entrada}!`);
+        })
+
+    }
 }
 
 function eliminarEntrada(id_entrada)
@@ -131,13 +143,14 @@ function eliminarEntrada(id_entrada)
     }
 }
 $(modal_entrada).on('hidden.bs.modal', function () {
-    document.getElementById('leyendaAgregar').style.display = 'block';
-    document.getElementById('leyendaEditar').style.display = 'none';
-    document.getElementById('buttonGuardar').style.display = 'block';
-    document.getElementById('buttonActualizar').style.display = 'none';
+    document.getElementById('leyendaAgregarEntrada').style.display = 'block';
+    document.getElementById('leyendaEditarEntrada').style.display = 'none';
+    document.getElementById('buttonGuardarEntrada').style.display = 'block';
+    document.getElementById('buttonActualizarEntrada').style.display = 'none';
     $("#id_entrada_update").val('');
     $("#id_actividad_entrada").val('');
     $("#descripcion_entrada").val('');
+    quitarErrorValidacion()
 });
 
 $(document).ready(function() {

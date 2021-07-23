@@ -11,14 +11,14 @@
             </div>
          </div>
          <div class="modal-body" id="modal_add_body">
-            <div id="alta_tarjetaCredito" class="form-medium">
+            <div class="form-medium">
                <div class="form-group">
                   <input type="hidden" id="id_criterio_efqm_update">
                   <label>Descripción del criterio EFQM:</label>
-                  <textarea maxlength="200" name="de_criterio_efqm" id="de_criterio_efqm" class="form-control" required></textarea>
+                  <textarea maxlength="200" name="de_criterio_efqm" id="de_criterio_efqm" class="form-control" required title="Descripción del criterio EFQM"></textarea>
                   <br>
                   <label>Abreviatura del criterio EFQM:</label>
-                  <input maxlength="5" type="text" class="form-control" id="abreviatura_criterio_efqm" required>
+                  <input maxlength="5" type="text" class="form-control" id="abreviatura_criterio_efqm" required title="Abreviatura del criterio EFQM">
                </div>
             </div>
          </div>

@@ -166,8 +166,7 @@ $(modal_actividad).on('hidden.bs.modal', function () {
     $("#de_actividad").val('');
     $("#orden_actividad").val('');
 
-    let elementos = [...document.querySelectorAll('.campo_vacio')]
-    elementos.map( e => e.classList.remove('campo_vacio') )
+    quitarErrorValidacion()
 
 });
 

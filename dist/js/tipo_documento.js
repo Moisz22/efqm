@@ -1,30 +1,35 @@
-let url = '../models/TipoDocumentoModel.php'
+let url = '../controllers/TipoDocumentoController.php'
+let label = 'tipo de documento'
+let capitalize_label = label.charAt(0).toUpperCase() + label.slice(1)
 
 function agregar()
 {
-    let descripcion = $("#de_tipo_documento").val();
-    let abreviatura = $("#abreviatura_tipo_documento").val();
+    let descripcion = document.getElementById('de_tipo_documento');
+    let abreviatura = document.getElementById('abreviatura_tipo_documento');
     let form_registro = new FormData;
-    form_registro.append('descripcion', descripcion);
-    form_registro.append('abreviatura', abreviatura);
+    form_registro.append('descripcion', descripcion.value);
+    form_registro.append('abreviatura', abreviatura.value);
     form_registro.append('action', 'guardar');
+    let validacion = validarCampos([descripcion, abreviatura]);
+    if(validacion==true)
+    {
+        fetch(url, {
 
-    fetch(url, {
+            method: 'post', 
+            body: form_registro
 
-        method: 'post', 
-        body: form_registro
-
-    }).then( res => res.text())
-    .then( res => {  
-        if(res=='ok')
-        {
-            $.notification.show('success','Tipo de documento creado correctamente!');
-            $("#modal-default").modal("hide");
-            setTimeout('document.location.reload()',1000);
-        }
-        else
-            $.notification.show('error','Error al crear el tipo de documento!');
-    })
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success',`${capitalize_label} creado correctamente!`);
+                $("#modal-default").modal("hide");
+                setTimeout('document.location.reload()',1000);
+            }
+            else
+                $.notification.show('error',`Error al crear el ${label}`);
+        })
+    }
 }
 
 function getData(id)
@@ -54,35 +59,38 @@ function getData(id)
 function actualizar()
 {
     let id_tipo_documento = $("#id_tipo_documento_update").val();
-    let descripcion = $("#de_tipo_documento").val();
-    let abreviatura = $("#abreviatura_tipo_documento").val();
+    let descripcion = document.getElementById('de_tipo_documento');
+    let abreviatura = document.getElementById('abreviatura_tipo_documento');
     let form_registro = new FormData;
-    form_registro.append('descripcion', descripcion);
+    form_registro.append('descripcion', descripcion.value);
     form_registro.append('id_tipo_documento', id_tipo_documento);
-    form_registro.append('abreviatura', abreviatura);
+    form_registro.append('abreviatura', abreviatura.value);
     form_registro.append('action', 'actualizar');
+    let validacion = validarCampos([descripcion, abreviatura]);
+    if(validacion==true)
+    {
+        fetch(url, {
 
-    fetch(url, {
+            method: 'post', 
+            body: form_registro
 
-        method: 'post', 
-        body: form_registro
-
-    }).then( res => res.text())
-    .then( res => {  
-        if(res=='ok')
-        {
-            $.notification.show('success','Tipo de documento actualizado correctamente!');
-            $("#modal-default").modal("hide");
-            setTimeout('document.location.reload()',1000);
-        }
-        else
-            $.notification.show('error','Error al actualizar el tipo de documento!'+res);
-    })
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success', `${capitalize_label} actualizado correctamente!`);
+                $("#modal-default").modal("hide");
+                setTimeout('document.location.reload()',1000);
+            }
+            else
+                $.notification.show('error',`Error al actualizar el ${label}`);
+        })
+    }
 }
 
 function eliminar(id_tipo_documento)
 {
-    let conf = confirm("Desea eliminar este tipo de proceso?");
+    let conf = confirm(`Desea eliminar este ${label}`);
     if (conf == true)
     {
         let form_registro = new FormData;
@@ -98,12 +106,12 @@ function eliminar(id_tipo_documento)
         .then( res => {  
             if(res=='ok')
             {
-                $.notification.show('success','Tipo de documento eliminado correctamente!');
+                $.notification.show('success',`${capitalize_label} eliminado correctamente!`);
                 $("#modal-default").modal("hide");
                 setTimeout('document.location.reload()',1000);
             }
             else
-                $.notification.show('error','Error al eliminar el tipo de documento!');
+                $.notification.show('error',`Error al eliminar el ${label}!`);
         })
     }
 }
@@ -115,4 +123,5 @@ $("#modal-default").on('hidden.bs.modal', function () {
     document.getElementById('buttonActualizar').style.display = 'none';
     $("#de_tipo_documento").val('');
     $("#abreviatura_tipo_documento").val('');
+    quitarErrorValidacion();
 });

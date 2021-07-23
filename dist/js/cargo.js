@@ -1,35 +1,36 @@
-let url = '../models/CargoModel.php'
+let url = '../controllers/CargoController.php'
 let label = 'cargo'
 let capitalize_label = label.charAt(0).toUpperCase() + label.slice(1)
 
 function agregar()
 {
-    let descripcion = $("#de_cargo").val();
+    let descripcion = document.getElementById('de_cargo');
     let jefe_cargo = '';
-
     jefe_cargo = (document.getElementById('jefe_cargo').checked) ? 1 : 0;
-        
     let form_registro = new FormData;
-    form_registro.append('descripcion', descripcion);
+    form_registro.append('descripcion', descripcion.value);
     form_registro.append('jefe_cargo', jefe_cargo);
     form_registro.append('action', 'guardar');
+    let validacion = validarCampos([descripcion]);
+    if(validacion==true)
+    {
+        fetch(url, {
 
-    fetch(url, {
+            method: 'post', 
+            body: form_registro
 
-        method: 'post', 
-        body: form_registro
-
-    }).then( res => res.text())
-    .then( res => {  
-        if(res=='ok')
-        {
-            $.notification.show('success',`${capitalize_label} creado correctamente!`);
-            $("#modal-default").modal("hide");
-            setTimeout('document.location.reload()',1000);
-        }
-        else
-            $.notification.show('error',`Error al crear el ${cargo}!`);
-    })
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success',`${capitalize_label} creado correctamente!`);
+                $("#modal-default").modal("hide");
+                setTimeout('document.location.reload()',1000);
+            }
+            else
+                $.notification.show('error',`Error al crear el ${label}!`);
+        })
+    }
 }
 
 function getData(id)
@@ -61,30 +62,33 @@ function getData(id)
 function actualizar()
 {
     let id_cargo = $("#id_cargo_update").val();
-    let descripcion = $("#de_cargo").val();
+    let descripcion = document.getElementById('de_cargo');
     jefe_cargo = (document.getElementById('jefe_cargo').checked) ? 1 : 0;
     let form_registro = new FormData;
-    form_registro.append('descripcion', descripcion);
+    form_registro.append('descripcion', descripcion.value);
     form_registro.append('id_cargo', id_cargo);
     form_registro.append('action', 'actualizar');
     form_registro.append('jefe_cargo', jefe_cargo);
+    let validacion = validarCampos([descripcion]);
+    if(validacion==true)
+    {
+        fetch(url, {
 
-    fetch(url, {
+            method: 'post', 
+            body: form_registro
 
-        method: 'post', 
-        body: form_registro
-
-    }).then( res => res.text())
-    .then( res => {  
-        if(res=='ok')
-        {
-            $.notification.show('success',`${capitalize_label} actualizado correctamente!`);
-            $("#modal-default").modal("hide");
-            setTimeout('document.location.reload()',1000);
-        }
-        else
-            $.notification.show('error',`Error al actualizar el ${label}!`);
-    })
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success',`${capitalize_label} actualizado correctamente!`);
+                $("#modal-default").modal("hide");
+                setTimeout('document.location.reload()',1000);
+            }
+            else
+                $.notification.show('error',`Error al actualizar el ${label}!`);
+        })
+    }
 }
 
 function eliminar(id_cargo)
@@ -121,5 +125,6 @@ $("#modal-default").on('hidden.bs.modal', function () {
     document.getElementById('buttonGuardar').style.display = 'block';
     document.getElementById('buttonActualizar').style.display = 'none';
     $("#de_cargo").val('');
-    $("#jefe_cargo").prop('checked', false); 
+    $("#jefe_cargo").prop('checked', false);
+    quitarErrorValidacion()
 });

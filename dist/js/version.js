@@ -1,30 +1,36 @@
-let url = '../models/VersionModel.php'
+let url = '../controllers/VersionController.php'
 let label = 'version'
 let capitalize_label = label.charAt(0).toUpperCase() + label.slice(1)
 
 function agregar()
 {
-    let descripcion = $("#de_version").val();
+    let descripcion = document.getElementById('de_version')
     let form_registro = new FormData;
-    form_registro.append('descripcion', descripcion);
+    form_registro.append('descripcion', descripcion.value);
     form_registro.append('action', 'guardar');
 
-    fetch(url, {
+    let validacion = validarCampos([descripcion])
 
-        method: 'post', 
-        body: form_registro
+    if(validacion == true){
 
-    }).then( res => res.text())
-    .then( res => {  
-        if(res=='ok')
-        {
-            $.notification.show('success',`${capitalize_label} creada correctamente!`);
-            $("#modal-default").modal("hide");
-            setTimeout('document.location.reload()',1000);
-        }
-        else
-            $.notification.show('error',`Error al crear la ${label}!`);
-    })
+        fetch(url, {
+
+            method: 'post', 
+            body: form_registro
+
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success',`${capitalize_label} creada correctamente!`);
+                $("#modal-default").modal("hide");
+                setTimeout('document.location.reload()',1000);
+            }
+            else
+                $.notification.show('error',`Error al crear la ${label}!`);
+        })
+
+    }
 }
 
 function getData(id)
@@ -52,29 +58,35 @@ function getData(id)
 
 function actualizar()
 {
-    let id_version = $("#id_version_update").val();
-    let descripcion = $("#de_version").val();
+    let id_version = document.getElementById('id_version_update');
+    let descripcion = document.getElementById('de_version');
     let form_registro = new FormData;
-    form_registro.append('descripcion', descripcion);
-    form_registro.append('id_version', id_version);
+    form_registro.append('descripcion', descripcion.value);
+    form_registro.append('id_version', id_version.value);
     form_registro.append('action', 'actualizar');
 
-    fetch(url, {
+    let validacion = validarCampos([id_version, descripcion])
 
-        method: 'post', 
-        body: form_registro
+    if(validacion == true){
 
-    }).then( res => res.text())
-    .then( res => {  
-        if(res=='ok')
-        {
-            $.notification.show('success',`${capitalize_label} actualizada correctamente!`);
-            $("#modal-default").modal("hide");
-            setTimeout('document.location.reload()',1000);
-        }
-        else
-            $.notification.show('error',`Error al actualizar la ${label}!`);
-    })
+        fetch(url, {
+
+            method: 'post', 
+            body: form_registro
+
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success',`${capitalize_label} actualizada correctamente!`);
+                $("#modal-default").modal("hide");
+                setTimeout('document.location.reload()',1000);
+            }
+            else
+                $.notification.show('error',`Error al actualizar la ${label}!`);
+        })
+
+    }
 }
 
 function eliminar(id_version)
@@ -111,4 +123,5 @@ $("#modal-default").on('hidden.bs.modal', function () {
     document.getElementById('buttonGuardar').style.display = 'block';
     document.getElementById('buttonActualizar').style.display = 'none';
     $("#de_version").val('');
+    quitarErrorValidacion()
 });

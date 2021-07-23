@@ -11,11 +11,11 @@
             </div>
          </div>
          <div class="modal-body" id="modal_add_body">
-            <div id="alta_tarjetaCredito" class="form-medium">
+            <div class="form-medium">
                <div class="form-group">
                   <input type="hidden" id="id_categoria_indicador_update">
-                  <label>Descripción del categoría de indicador:</label>
-                  <textarea maxlength="200" name="de_categoria_indicador" id="de_categoria_indicador" class="form-control" required></textarea>
+                  <label>Descripción de la categoría de indicador:</label>
+                  <textarea maxlength="200" name="de_categoria_indicador" id="de_categoria_indicador" class="form-control" required title="Descripción de la categoría de indicador"></textarea>
                </div>
             </div>
          </div>

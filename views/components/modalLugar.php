@@ -11,11 +11,11 @@
             </div>
          </div>
          <div class="modal-body" id="modal_add_body">
-            <div id="alta_tarjetaCredito" class="form-medium">
+            <div class="form-medium">
                <div class="form-group">
                   <input type="hidden" id="id_lugar_update">
                   <label>Descripción del lugar:</label>
-                  <textarea maxlength="150" name="de_lugar" id="de_lugar" class="form-control" required></textarea>
+                  <textarea maxlength="150" name="de_lugar" id="de_lugar" class="form-control" required title="Descripción del lugar"></textarea>
                </div>
             </div>
          </div>
