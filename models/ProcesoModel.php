@@ -89,38 +89,17 @@ class ProcesoModel extends Model
         else
             echo $validacion;
     }
-}
 
-$ProcesoModel = new ProcesoModel();
-
-if (isset($_POST['action'])) {
-    $action = $_POST['action'];
-    switch ($action) {
-        case 'guardarProceso':
-            $ProcesoModel->$action(['descripcion_proceso' => $_POST['nombre_proceso'], 'abreviatura_proceso' => $_POST['abreviatura_proceso'], 'id_tipo_proceso' => $_POST['tipo_proceso'], 'id_propietario_proceso' => $_POST['propietario'], 'id_version_proceso' => $_POST['version'], 'fecha_elaboracion_proceso' => $_POST['fecha_elaboracion'], 'objetivo_proceso' => $_POST['objetivo'], 'alcance_proceso' => $_POST['alcance']]);
-            break;
-        case 'actualizar':
-            $ProcesoModel->$action(['descripcion_proceso' => $_POST['nombre_proceso'], 'abreviatura_proceso' => $_POST['abreviatura_proceso'], 'id_tipo_proceso' => $_POST['tipo_proceso'], 'id_propietario_proceso' => $_POST['propietario'], 'id_version_proceso' => $_POST['version'], 'fecha_elaboracion_proceso' => $_POST['fecha_elaboracion'], 'objetivo_proceso' => $_POST['objetivo'], 'alcance_proceso' => $_POST['alcance']], $_POST['id_proceso']);
-            break;
-        case 'guardarResponsables':
-            $ProcesoModel->$action($_POST['id_proceso'], $_POST['responsables']);
-            break;
-        case 'guardarIndicadores':
-            $ProcesoModel->$action($_POST['id_proceso'], $_POST['indicadores']);
-            break;
-        case 'guardarProcesosRelacionados':
-            $ProcesoModel->$action($_POST['id_proceso'], $_POST['procesos_relacionados']);
-            break;
-        case 'find':
-            $ProcesoModel->$action($_POST['id_proceso']);
-            break;
-
-        case 'actualizar':
-            $ProcesoModel->$action(['descripcion_proceso' => $_POST['descripcion'], 'jefe_proceso' => $_POST['jefe_proceso']], $_POST['id_proceso']);
-            break;
-
-        case 'eliminar':
-            $ProcesoModel->$action($_POST['id_proceso']);
-            break;
+    public function datosProceso($id_proceso)
+    {
+        $sql = 'SELECT a.*, b.abreviatura_tipo_proceso, c.descripcion_version as version, d.descripcion_cargo as propietario
+        FROM proceso as a
+        INNER JOIN tipo_proceso as b ON (a.id_tipo_proceso = b.id_tipo_proceso)
+        INNER JOIN version as c ON (a.id_version_proceso = c.id_version)
+        INNER JOIN cargo as d ON (a.id_propietario_proceso = d.id_cargo)
+        WHERE a.id_proceso = '.$id_proceso.' AND a.estado_proceso = 1';
+        $stm = $this->db->prepare($sql);
+        $stm->execute();
+        return $stm->fetchAll(PDO::FETCH_OBJ);
     }
 }

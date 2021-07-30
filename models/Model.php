@@ -112,8 +112,7 @@ class Model{
         
         $sql = 'update ' . $this->table . ' set '. $cadena_campos .' where ' .$this->keyName. ' = ' .$keyvalue;
         $stm = $this->db->prepare($sql);
-        $stm->execute($cadena);
-        echo ($stm->rowCount() > 0) ? 'ok' : var_dump($cadena) ;
+        echo ($stm->execute($cadena)) ? 'ok' : var_dump($cadena) ;
     }
 
     public function eliminar(int $value)

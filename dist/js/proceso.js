@@ -1,4 +1,4 @@
-let url = '../models/ProcesoModel.php'
+let url = '../controllers/ProcesoController.php'
 let label = 'proceso'
 let capitalize_label = label.charAt(0).toUpperCase() + label.slice(1)
 const mostrarOpcion = [...document.querySelectorAll('.mostrarOpcion')]

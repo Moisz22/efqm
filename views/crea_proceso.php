@@ -6,6 +6,7 @@ include "static/header.php";
 include "static/aside.php";
 include '../models/ProcesoModel.php';
 include '../controllers/ActividadController.php';
+include '../controllers/ProcesoController.php';
 $rmodel = new ProcesoModel;
 $resultados = $rmodel->consulta();
 $comboTipoProceso = $rmodel->searchTable('tipo_proceso');
