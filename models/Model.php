@@ -50,6 +50,15 @@ class Model{
         $stm->execute();
         return $stm->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function selected($tabla, $campo, $valor)
+    {
+        $sql = 'select * from ' . $tabla . ' WHERE '.$campo.' = '.$valor;
+        $stm = $this->db->prepare($sql);
+        $stm->execute();
+        $seleccionados = $stm->fetchAll();
+        return ($seleccionados) ? $seleccionados : false;
+    }
     
     public function guardar(array $array)
     {
@@ -114,5 +123,13 @@ class Model{
         $stm->bindParam(':value', $value);
         $stm->execute();
         echo ($stm->rowCount() > 0) ? 'ok' : 'error' ;
+    }
+
+    public function destroy($tabla, $campo, $valor)
+    {
+        $sql = 'delete from ' . $tabla . ' where ' .$campo. ' = :value';
+        $stm = $this->db->prepare($sql);
+        $stm->bindParam(':value', $valor);
+        return ($stm->execute()) ? 'ok' : 'error';
     }
 }

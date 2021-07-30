@@ -47,7 +47,8 @@
                   <td class="text-center"><?php echo ($r->descripcion_cargo); ?></td>
                   <td class="text-center"><?php echo date('d/m/Y' , strtotime($r->fecha_elaboracion_proceso)); ?></td>
                   <td class="text-center">
-                    <a class="btn btn-primary" onclick="getData(<?php echo $r->id_proceso; ?>)"><i class="fas fa-pencil-alt"></i></a>
+                    <a class="btn btn-warning" target="_blank" href="ficha_proceso?id=<?php echo base64_encode($r->id_proceso); ?>"><i class="far fa-file-pdf"></i></a>
+                    <a class="btn btn-primary" href="crea_proceso?id=<?php echo base64_encode($r->id_proceso); ?>"><i class="fas fa-pencil-alt"></i></a>
                     <a class="btn btn-danger" onclick="eliminar(<?php echo $r->id_proceso; ?>)"><i class="fas fa-trash-alt"></i></a>
                   </td>
               </tr>
@@ -62,6 +63,8 @@
 <?php
   include 'static/footer.php';
   ?>
+  <script src="../dist/js/proceso.js"></script>
+  <script type="text/javascript" src="../dist/js/jquery.notification.js"></script>
 <script>
   $(document).ready(function() {
       $('#example1').DataTable( {

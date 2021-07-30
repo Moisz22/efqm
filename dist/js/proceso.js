@@ -59,7 +59,7 @@ function agregar()
                 guardaResponsables(array[1],JSON.stringify(responsables));
                 guardaIndicadores(array[1],JSON.stringify(indicador));
                 guardaProcesosRelacionados(array[1],JSON.stringify(procesos_relacionados));
-                $('#btn_guardar').attr('onclick', '');
+                $('#btn_guardar').attr('onclick', 'actualizar()');
                 obtenerTablaActividad();
                 obtenerAcordeon();
                 obtenerTablaEntrada();
@@ -70,6 +70,67 @@ function agregar()
                 obtenerTablaRecursoProceso();
             }
             else $.notification.show('error',`Error al crear el ${label}!`);
+
+            $("#modal-default-cargando").modal("hide");
+        })
+    }
+}
+
+function actualizar()
+{
+    let id_proceso = $('#id_proceso').val();
+    let nombre_proceso = document.getElementById('nombre_proceso');
+    let abreviatura_proceso = document.getElementById('abreviatura_proceso');
+    let tipo_proceso = document.getElementById('tipo_proceso');
+    let propietario = document.getElementById('propietario');
+    let version = document.getElementById('version');
+    let fecha_elaboracion = document.getElementById('fecha_elaboracion');
+    let objetivo = document.getElementById('objetivo');
+    let alcance = document.getElementById('alcance');
+
+    let responsables = [];
+    $("select[name='responsables[]'] option:selected").each(function(){
+        responsables.push($(this).val());
+    });
+
+    let indicador = [];
+    $("select[name='indicador[]'] option:selected").each(function(){
+        indicador.push($(this).val());
+    });
+
+    let procesos_relacionados = [];
+    $("select[name='procesos_relacionados[]'] option:selected").each(function(){
+        procesos_relacionados.push($(this).val());
+    });
+      
+    let form_registro = new FormData;
+    form_registro.append('id_proceso', id_proceso);
+    form_registro.append('nombre_proceso', nombre_proceso.value);
+    form_registro.append('abreviatura_proceso', abreviatura_proceso.value);
+    form_registro.append('tipo_proceso', tipo_proceso.value);
+    form_registro.append('propietario', propietario.value);
+    form_registro.append('version', version.value);
+    form_registro.append('fecha_elaboracion', fecha_elaboracion.value);
+    form_registro.append('objetivo', objetivo.value);
+    form_registro.append('alcance', alcance.value);
+    form_registro.append('action', 'actualizar');
+    let validacion = validarCampos([nombre_proceso, abreviatura_proceso, tipo_proceso, propietario, version, fecha_elaboracion, objetivo, alcance]);
+    if(validacion==true)
+    {
+        fetch(url, {
+            method: 'post', 
+            body: form_registro
+
+        }).then( res => res.text())
+        .then( res => {
+            if(res=='ok')
+            {
+                $.notification.show('success',`${capitalize_label} actualizado correctamente!`);
+                guardaResponsables(id_proceso,JSON.stringify(responsables));
+                guardaIndicadores(id_proceso,JSON.stringify(indicador));
+                guardaProcesosRelacionados(id_proceso,JSON.stringify(procesos_relacionados));
+            }
+            else $.notification.show('error',`Error al actualizar el ${label}!`);
 
             $("#modal-default-cargando").modal("hide");
         })
@@ -93,6 +154,8 @@ function guardaResponsables(id_proceso, array_responsables)
             {
                console.log('responsables guardados');
             }
+            else
+              console.log(res);
         })
 }
 function guardaIndicadores(id_proceso, array_indicadores)
@@ -113,6 +176,8 @@ function guardaIndicadores(id_proceso, array_indicadores)
             {
                console.log('indicadores guardados');
             }
+            else
+              console.log(res);
         })
 }
 function guardaProcesosRelacionados(id_proceso, array_procesos)
@@ -133,6 +198,8 @@ function guardaProcesosRelacionados(id_proceso, array_procesos)
             {
                console.log('procesos relacionados guardados');
             }
+            else
+              console.log(res);
         })
 }
 function getData(id)
@@ -161,34 +228,6 @@ function getData(id)
     })
 }
 
-function actualizar()
-{
-    let id_proceso = $("#id_proceso_update").val();
-    let descripcion = $("#de_proceso").val();
-    jefe_proceso = (document.getElementById('jefe_proceso').checked) ? 1 : 0;
-    let form_registro = new FormData;
-    form_registro.append('descripcion', descripcion);
-    form_registro.append('id_proceso', id_proceso);
-    form_registro.append('action', 'actualizar');
-    form_registro.append('jefe_proceso', jefe_proceso);
-
-    fetch(url, {
-
-        method: 'post', 
-        body: form_registro
-
-    }).then( res => res.text())
-    .then( res => {  
-        if(res=='ok')
-        {
-            $.notification.show('success',`${capitalize_label} actualizado correctamente!`);
-            $("#modal-default").modal("hide");
-            setTimeout('document.location.reload()',1000);
-        }
-        else
-            $.notification.show('error',`Error al actualizar el ${label}!`);
-    })
-}
 
 function eliminar(id_proceso)
 {
@@ -209,7 +248,6 @@ function eliminar(id_proceso)
             if(res=='ok')
             {
                 $.notification.show('success',`${capitalize_label} eliminado correctamente!`);
-                $("#modal-default").modal("hide");
                 setTimeout('document.location.reload()',1000);
             }
             else

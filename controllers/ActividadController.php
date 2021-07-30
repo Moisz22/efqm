@@ -2,12 +2,14 @@
 
 require_once '../models/ActividadModel.php';
 
-class ActividadController{
+class ActividadController
+{
 
     private $actividadModel;
     private $tabla = 'actividad';
 
-    public function __construct () {
+    public function __construct()
+    {
         $this->actividadModel = new ActividadModel;
     }
 
@@ -43,14 +45,13 @@ class ActividadController{
         </thead>
         <tbody>';
         $result = $this->actividadModel->searchTableWhere($this->tabla, 'id_proceso', $_POST['id_proceso']);
-        foreach ($result as $r)
-        {
+        foreach ($result as $r) {
             $data .= '<tr>
-            <td align = "center">'.$r->orden_actividad.'</td>
-            <td>'.$r->descripcion_actividad.'</td>
+            <td align = "center">' . $r->orden_actividad . '</td>
+            <td>' . $r->descripcion_actividad . '</td>
             <td align = "center">
-                <a title="Editar Nombre" onclick="getDataActividad('.$r->id_actividad.')" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i></a>
-                <a title="Editar Nombre" onclick="eliminarActividad('.$r->id_actividad.')" class="btn btn-danger"> <i class="fa fa-remove"></i></a>
+                <a title="Editar Nombre" onclick="getDataActividad(' . $r->id_actividad . ')" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i></a>
+                <a title="Editar Nombre" onclick="eliminarActividad(' . $r->id_actividad . ')" class="btn btn-danger"> <i class="fa fa-remove"></i></a>
             </td>
         </tr>';
         }
@@ -74,21 +75,18 @@ class ActividadController{
     {
         $data = "<option value=''>Seleccione...</option>";
         $result = $this->actividadModel->consulta($_POST['id_proceso']);
-        foreach ($result as $r)
-        {
-            $data .= "<option value='".$r->id_actividad."'>".$r->descripcion_actividad."</option>";
+        foreach ($result as $r) {
+            $data .= "<option value='" . $r->id_actividad . "'>" . $r->descripcion_actividad . "</option>";
         }
         echo $data;
     }
-
 }
 
 
 $actividadController = new ActividadController;
 
 
-if(isset($_POST['action']) && !empty($_POST['action']))
-{
+if (isset($_POST['action']) && !empty($_POST['action'])) {
     $accion = $_POST['action'];
     $actividadController->$accion();
 }
