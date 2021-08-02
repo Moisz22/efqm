@@ -38,7 +38,7 @@ function agregar()
                 mostrarOpcion.map( e=> e.style.display = 'block' )
                 $("#id_indicador").val(array[1]);
                 $('#btn_guardar').attr('onclick', 'actualizar()');
-            
+                obtenerTablaIndicadorDetalle();
             }
             else $.notification.show('error',`Error al crear el ${res}!`);
 

@@ -130,7 +130,14 @@ if (isset($_GET['id'])) {
                         </div>
                       </div>
                       <div class="col-md-6">
-                        <canvas id="chart1" style="width:50%;" height="100"></canvas>
+                        <div class="box box-primary">
+                          <div class="box-header with-border">
+                            <h3 class="box-title">Gráfico</h3>
+                          </div>
+                          <div class="box-body" id="renderizarCanvas">
+                            <!-- <canvas id="chart1" style="width:50%;" height="100"></canvas> -->
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

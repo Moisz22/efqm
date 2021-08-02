@@ -18,7 +18,7 @@
     <title>EFQM | <?php if(isset($page)){echo $page;}?></title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!--BOOTSTRAP -->
-    <link rel="stylesheet" href="../plugins/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <!--FONT-AWESOME-->
     <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
@@ -29,9 +29,9 @@
   <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
  
     <!--DATATABLES-->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.0/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../node_modules/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="../node_modules/datatables.net-responsive-dt/css/responsive.dataTables.min.css">
     <!--GRAPH-->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!--ESTILO Y TAMAÑO DE FUENTE-->
@@ -39,8 +39,7 @@
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
       <!--ESTILO PARA MENSAJE DE NOTIFICACION-->
       <link rel="stylesheet" type="text/css" href="../dist/css/style.css">
-     <!--JQUERY-->
-     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 
     <style type="text/css">
       table.dataTable thead tr th {

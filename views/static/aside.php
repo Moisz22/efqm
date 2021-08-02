@@ -33,7 +33,7 @@
           <ul class="treeview-menu">
             <li class="<?php if(isset($active13)){echo $active13;}?>"><a href="procesos"><i class="fas fa-clipboard-list"></i> <span>Procesos</span></a></li>
             <li class="<?php if(isset($active14)){echo $active14;}?>"><a href="indicadores"><i class="fas fa-thumbtack"></i> <span>Indicadores</span></a></li>
-            <!--<li class="<?php if(isset($active15)){echo $active15;}?>"><a href="cargos"><i class="fas fa-briefcase"></i> <span>Cargos</span></a></li>-->
+            <li class="<?php if(isset($active15)){echo $active15;}?>"><a href="actas"><i class="fas fa-file-signature"></i> <span>Actas de equipo</span></a></li>
           </ul>
         </li>
       </ul>

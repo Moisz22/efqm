@@ -76,6 +76,11 @@ class IndicadorDetalleController
 
         echo $data;
     }
+
+    public function grafico()
+    {
+        $this->indicadorDetalleModel->obtenerDetalle($_POST['id_indicador']);
+    }
 }
 
 
