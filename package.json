@@ -1,0 +1,25 @@
+{
+  "name": "efqm",
+  "version": "1.0.0",
+  "description": "proyecto de titulacion",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "efqm"
+  ],
+  "author": "Jean Pierre Chavez Moises Suarez",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.4.1",
+    "chart.js": "^3.5.0",
+    "datatables.net-bs": "^1.10.25",
+    "datatables.net-dt": "^1.10.25",
+    "datatables.net-responsive-dt": "^2.2.9",
+    "jquery": "^3.6.0"
+  }
+}

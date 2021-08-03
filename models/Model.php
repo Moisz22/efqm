@@ -131,4 +131,13 @@ class Model{
         $stm->bindParam(':value', $valor);
         return ($stm->execute()) ? 'ok' : 'error';
     }
+
+    public function secuencial($tabla, $campo, $valor)
+    {
+        $sql = 'SELECT MAX(secuencial_'.$tabla.') as secuencial FROM '.$tabla.' WHERE '.$campo.' = :value';
+        $stm = $this->db->prepare($sql);
+        $stm->bindParam(':value', $valor);
+        $stm->execute();
+        return $stm->fetchAll(PDO::FETCH_OBJ);
+    }
 }
