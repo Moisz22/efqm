@@ -102,4 +102,17 @@ class ProcesoModel extends Model
         $stm->execute();
         return $stm->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function consultaProcesoPorTipo($id_tipo_proceso)
+    {
+        $sql = 'SELECT a.*, b.abreviatura_tipo_proceso, c.descripcion_version as version, d.descripcion_cargo as propietario
+        FROM '.$this->table.' as a
+        INNER JOIN tipo_proceso as b ON (a.id_tipo_proceso = b.id_tipo_proceso)
+        INNER JOIN version as c ON (a.id_version_proceso = c.id_version)
+        INNER JOIN cargo as d ON (a.id_propietario_proceso = d.id_cargo)
+        WHERE a.estado_'.$this->table. ' = 1 and a.id_tipo_proceso = :value ORDER BY a.secuencial_proceso';
+        $stm = $this->db->prepare($sql);
+        $stm->execute([':value'=>$id_tipo_proceso]);
+        return $stm->fetchAll(PDO::FETCH_OBJ);
+    }
 }

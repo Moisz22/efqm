@@ -1,5 +1,5 @@
 <?php
-require('../plugins/fpdf183/fpdf.php');
+require '../plugins/fpdf183/fpdf.php';
 include '../models/ProcesoModel.php';
 include '../models/PoliticaModel.php';
 include '../models/ActividadModel.php';
@@ -7,6 +7,7 @@ include '../models/SubactividadModel.php';
 include '../models/AnexoProcesoModel.php';
 include '../models/ControlCambioModel.php';
 include '../models/RecursoProcesoModel.php';
+include '../models/IndicadorModel.php';
 $rmodel = new ProcesoModel;
 $pmodel = new PoliticaModel;
 $amodel = new ActividadModel;
@@ -14,9 +15,11 @@ $subactividadModel = new SubactividadModel;
 $anexoProcesoModel = new AnexoProcesoModel;
 $controlCambioModel = new ControlCambioModel;
 $recursoProcesoModel = new RecursoProcesoModel;
+$indicadorModel = new IndicadorModel;
 if (isset($_GET['id'])) {
     $id = base64_decode($_GET['id']);
     $datoProceso = $rmodel->datosProceso($id);
+    $secuencial_proceso = $datoProceso[0]->secuencial_proceso;
     $nombre_proceso = $datoProceso[0]->descripcion_proceso;
     $abreviatura_proceso = $datoProceso[0]->abreviatura_proceso;
     $abreviatura_tipo_proceso = $datoProceso[0]->abreviatura_tipo_proceso;
@@ -210,7 +213,7 @@ class PDF extends FPDF
         $this->SetTextColor(0, 0, 0);
         $this->Cell(53, 10, $this->Image("../dist/img/logo_pdf.jpg", 17, 10, 40, 10), 1);
         $this->ln();
-        $this->Cell(53, 5, utf8_decode('Código: ') . $GLOBALS['abreviatura_tipo_proceso'] . "-" . $GLOBALS['abreviatura_proceso'] . "- 1", 1, 1, 'C');
+        $this->Cell(53, 5, utf8_decode('Código: ') . $GLOBALS['abreviatura_tipo_proceso'] . "-" . $GLOBALS['abreviatura_proceso'] . "-".$GLOBALS['secuencial_proceso'], 1, 1, 'C');
         $this->Cell(2);
         $this->SetXY(63, 10);
         $this->Cell(84, 15, $GLOBALS['nombre_proceso'], 1, 1, 'C');
@@ -294,7 +297,7 @@ $pdf->Cell(53, 5, '1. Objetivo.-', 0, 0, 'L');
 $pdf->ln();
 $pdf->SetFont('Arial', '', 10);
 $pdf->cell(4);
-$pdf->MultiCell(195, 5, utf8_decode($objetivo), 0, 1);
+$pdf->MultiCell(185, 5, utf8_decode($objetivo), 0, 'J');
 $pdf->ln(2);
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->MultiCell(195, 5, utf8_decode('2. Política.- '), 0, 1);
@@ -318,7 +321,7 @@ $pdf->SetFont('Arial', 'B', 10);
 $pdf->MultiCell(195, 5, utf8_decode('3. Alcance.- '), 0, 1);
 $pdf->SetFont('Arial', '', 10);
 $pdf->cell(4);
-$pdf->MultiCell(195, 5, utf8_decode($alcance), 0, 1);
+$pdf->MultiCell(185, 5, utf8_decode($alcance), 0, 'J');
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->ln(2);
 $pdf->MultiCell(195, 5, utf8_decode('4. Procedimiento.- '), 0, 1);
@@ -466,8 +469,8 @@ $pdf->SetDrawColor(0, 0, 0);
 $pdf->SetFont('Arial', '', 10);
 if ($responsables != false) {
     foreach ($indicadores as $rowin) :
-        $dato_indicador = $rmodel->searchTableWhere('indicador', 'id_indicador', $rowin['id_indicador']);
-        $pdf->Row(array(utf8_decode($dato_indicador[0]->descripcion_indicador), utf8_decode($dato_indicador[0]->formula_indicador), $dato_indicador[0]->meta_indicador, 'PENDIENTE'));
+        $dato_indicador = $indicadorModel->consultaIdicadorFichaProceso($rowin['id_indicador']);
+        $pdf->Row(array(utf8_decode($dato_indicador[0]->descripcion_indicador), utf8_decode($dato_indicador[0]->formula_indicador), $dato_indicador[0]->meta_indicador, $dato_indicador[0]->descripcion_frecuencia));
     endforeach;
 }
 $pdf->Output();

@@ -44,4 +44,17 @@ class IndicadorModel extends Model{
         $stm->execute($cadena);
         echo ($stm->rowCount() > 0) ? 'ok_' . $this->db->lastInsertId() : $sql;
     }
+
+    public function consultaIdicadorFichaProceso($id_indicador)
+    {
+        $sql = 'SELECT a.*, b.abreviatura_criterio_efqm, c.descripcion_frecuencia, d.descripcion_categoria_indicador
+        FROM `indicador` as a
+        INNER JOIN criterio_efqm as b ON (a.id_criterio_efqm = b.id_criterio_efqm)
+        INNER JOIN frecuencia as c ON (a.id_frecuencia_indicador = c.id_frecuencia)
+        INNER JOIN categoria_indicador as d ON (a.id_categoria_indicador = d.id_categoria_indicador)
+        WHERE a.estado_indicador = 1 AND id_indicador = :value';
+        $stm = $this->db->prepare($sql);
+        $stm->execute([':value'=> $id_indicador]);
+        return $stm->fetchAll(PDO::FETCH_OBJ);
+    }
 }

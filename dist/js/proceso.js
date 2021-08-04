@@ -79,6 +79,7 @@ function agregar()
 function actualizar()
 {
     let id_proceso = $('#id_proceso').val();
+    let secuencial_proceso = document.getElementById('secuencial_proceso');
     let nombre_proceso = document.getElementById('nombre_proceso');
     let abreviatura_proceso = document.getElementById('abreviatura_proceso');
     let tipo_proceso = document.getElementById('tipo_proceso');
@@ -105,6 +106,7 @@ function actualizar()
       
     let form_registro = new FormData;
     form_registro.append('id_proceso', id_proceso);
+    form_registro.append('secuencial_proceso', secuencial_proceso.value);
     form_registro.append('nombre_proceso', nombre_proceso.value);
     form_registro.append('abreviatura_proceso', abreviatura_proceso.value);
     form_registro.append('tipo_proceso', tipo_proceso.value);
@@ -114,7 +116,7 @@ function actualizar()
     form_registro.append('objetivo', objetivo.value);
     form_registro.append('alcance', alcance.value);
     form_registro.append('action', 'actualizar');
-    let validacion = validarCampos([nombre_proceso, abreviatura_proceso, tipo_proceso, propietario, version, fecha_elaboracion, objetivo, alcance]);
+    let validacion = validarCampos([secuencial_proceso, nombre_proceso, abreviatura_proceso, tipo_proceso, propietario, version, fecha_elaboracion, objetivo, alcance]);
     if(validacion==true)
     {
         fetch(url, {

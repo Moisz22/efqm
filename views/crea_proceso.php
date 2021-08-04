@@ -96,6 +96,10 @@ if (isset($_GET['id'])) {
                 <div class="tab-pane active" id="tab1" name="tab1">
                   <div class="row">
                     <input type="hidden" id="id_proceso" value="<?php echo $id; ?>">
+                    <div class="form-group col-md-6" style="display: <?php echo $display; ?>;">
+                      <label>Secuencial: </label>
+                      <input type="text" value="<?php echo ($id != '') ? $datoProceso[0]->secuencial_proceso : ''; ?>" id="secuencial_proceso" style="width: 100%;" class="form-control" required title="Secuencial">
+                    </div>
                     <div class="form-group col-md-6">
                       <label>Nombre del Proceso: </label>
                       <input type="text" value="<?php echo ($id != '') ? $datoProceso[0]->descripcion_proceso : ''; ?>" id="nombre_proceso" style="width: 100%;" class="form-control" required title="Nombre del Proceso">

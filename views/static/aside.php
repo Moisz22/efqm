@@ -36,6 +36,19 @@
             <li class="<?php if(isset($active15)){echo $active15;}?>"><a href="actas"><i class="fas fa-file-signature"></i> <span>Actas de equipo</span></a></li>
           </ul>
         </li>
+        <li class="treeview <?php if(isset($active16)||isset($active17)||isset($active18)){echo 'active';}?>">
+          <a href="#">
+          <i class="fas fa-folder-open"></i> <span>Reportes</span>
+          <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+          </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php if(isset($active16)){echo $active16;}?>"><a href="reporte_tipo_proceso"><i class="fas fa-file-pdf"></i> <span>Reporte por tipo de proceso</span></a></li>
+            <!-- <li class="<?php if(isset($active14)){echo $active14;}?>"><a href="indicadores"><i class="fas fa-thumbtack"></i> <span>Indicadores</span></a></li>
+            <li class="<?php if(isset($active15)){echo $active15;}?>"><a href="actas"><i class="fas fa-file-signature"></i> <span>Actas de equipo</span></a></li> -->
+          </ul>
+        </li>
       </ul>
     </section>
   </aside>

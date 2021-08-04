@@ -12,7 +12,9 @@ class ProcesoController{
 
     public function guardarProceso()
     {
-        $this->procesoModel->guardarProceso(['descripcion_proceso' => $_POST['nombre_proceso'], 'abreviatura_proceso' => $_POST['abreviatura_proceso'], 'id_tipo_proceso' => $_POST['tipo_proceso'], 'id_propietario_proceso' => $_POST['propietario'], 'id_version_proceso' => $_POST['version'], 'fecha_elaboracion_proceso' => $_POST['fecha_elaboracion'], 'objetivo_proceso' => $_POST['objetivo'], 'alcance_proceso' => $_POST['alcance']]);
+        $datoSecuencial = $this->procesoModel->secuencial('proceso', 'id_tipo_proceso', $_POST['tipo_proceso']);
+        $secuencial = ($datoSecuencial[0]->secuencial != NULL) ? ($datoSecuencial[0]->secuencial + 1) : '1';
+        $this->procesoModel->guardarProceso(['secuencial_proceso' => $secuencial,'descripcion_proceso' => $_POST['nombre_proceso'], 'abreviatura_proceso' => $_POST['abreviatura_proceso'], 'id_tipo_proceso' => $_POST['tipo_proceso'], 'id_propietario_proceso' => $_POST['propietario'], 'id_version_proceso' => $_POST['version'], 'fecha_elaboracion_proceso' => $_POST['fecha_elaboracion'], 'objetivo_proceso' => $_POST['objetivo'], 'alcance_proceso' => $_POST['alcance']]);
     }
 
     public function find()
@@ -22,7 +24,7 @@ class ProcesoController{
 
     public function actualizar()
     {
-        $this->procesoModel->actualizar(['descripcion_proceso' => $_POST['nombre_proceso'], 'abreviatura_proceso' => $_POST['abreviatura_proceso'], 'id_tipo_proceso' => $_POST['tipo_proceso'], 'id_propietario_proceso' => $_POST['propietario'], 'id_version_proceso' => $_POST['version'], 'fecha_elaboracion_proceso' => $_POST['fecha_elaboracion'], 'objetivo_proceso' => $_POST['objetivo'], 'alcance_proceso' => $_POST['alcance']], $_POST['id_proceso']);
+        $this->procesoModel->actualizar(['secuencial_proceso' => $_POST['secuencial_proceso'],'descripcion_proceso' => $_POST['nombre_proceso'], 'abreviatura_proceso' => $_POST['abreviatura_proceso'], 'id_tipo_proceso' => $_POST['tipo_proceso'], 'id_propietario_proceso' => $_POST['propietario'], 'id_version_proceso' => $_POST['version'], 'fecha_elaboracion_proceso' => $_POST['fecha_elaboracion'], 'objetivo_proceso' => $_POST['objetivo'], 'alcance_proceso' => $_POST['alcance']], $_POST['id_proceso']);
     }
 
     public function guardarResponsables()
