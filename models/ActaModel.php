@@ -119,4 +119,37 @@ class ActaModel extends Model
         $stm->execute();
         return $stm->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function inasistentesPorFecha($fecha_desde, $fecha_hasta)
+    {
+        $sql = "SELECT DISTINCT a.id_persona, CONCAT(b.nombre_persona, ' ', b.apellido_persona) as descripcion_persona, e.descripcion_equipo_trabajo
+        FROM `acta_asistentes` as a
+        INNER JOIN persona as b ON (a.id_persona = b.id_persona)
+        INNER JOIN acta as c ON (a.id_acta = c.id_acta)
+        INNER JOIN usuario as d ON (a.id_persona = d.id_persona)
+        INNER JOIN equipo_trabajo as e ON (d.equipo_usuario = e.id_equipo_trabajo)
+        WHERE (((c.fecha_acta)>=:fecha_desde
+        AND c.estado_acta != 0
+        AND (c.fecha_acta)<=:fecha_hasta)
+        AND (a.fl_asistencia)=0) ORDER BY e.descripcion_equipo_trabajo";
+        $stm = $this->db->prepare($sql);
+        $stm->execute([':fecha_desde'=>$fecha_desde, ':fecha_hasta'=>$fecha_hasta]);
+        return $stm->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function inasistencia($id_persona, $fecha_desde, $fecha_hasta)
+    {
+        $sql = "SELECT c.id_acta, c.fecha_acta
+        FROM `acta_asistentes` as a
+        INNER JOIN persona as b ON (a.id_persona = b.id_persona)
+        INNER JOIN acta as c ON (a.id_acta = c.id_acta)
+        WHERE (((c.fecha_acta)>=:fecha_desde
+        AND c.estado_acta != 0
+        AND (c.fecha_acta)<=:fecha_hasta)
+        AND (a.fl_asistencia)=0
+        AND a.id_persona= :id_persona)";
+        $stm = $this->db->prepare($sql);
+        $stm->execute([':fecha_desde'=>$fecha_desde, ':fecha_hasta'=>$fecha_hasta, ':id_persona'=>$id_persona]);
+        return $stm->fetchAll(PDO::FETCH_OBJ);
+    }
 }

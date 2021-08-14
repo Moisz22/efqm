@@ -3,6 +3,18 @@ let modal_indicador_detalle = '#modal-default-indicador-detalle'
 let url_indicador_detalle = '../controllers/IndicadorDetalleController.php'
 let capitalize_label_indicador_detalle = label_indicador_detalle.charAt(0).toUpperCase() + label_indicador_detalle.slice(1)
 
+
+function filtraGrafico(categoria_indicador)
+{
+    if (categoria_indicador=='')
+    {
+        location.href = "grafico_indicador";   
+    }
+    else
+        location.href = "grafico_indicador?id="+btoa(categoria_indicador);
+    
+}
+
 function obtenerTablaIndicadorDetalle() {
     let id_indicador = $("#id_indicador").val();
     let form_registro = new FormData;
@@ -197,6 +209,85 @@ function graficoDetalle() {
             /*CODIGO DEL GRÁFICO*/
             let titulo = $('#descripcion_indicador').val();
             let ctx = document.getElementById('chart1').getContext('2d');
+            let myChart = new Chart(ctx, {
+                data: {
+                    labels: etiquetas,
+                    datasets: [{
+                            type: 'line',
+                            label: 'Metas',
+                            data: metas,
+                            backgroundColor: ['rgb(254, 204, 86)'],
+                            borderColor: ['rgb(254, 204, 86)'],
+                            borderWidth: 1
+                        },
+                        {
+                            type: 'bar',
+                            label: 'Resultados',
+                            data: resultados,
+                            backgroundColor: colores,
+                            borderColor: colores,
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                suggestedMin: 0
+                            }
+                        }]
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: titulo,
+                        },
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                        }
+                    }
+                }
+            });
+            
+        })
+
+}
+
+function graficoReporte(id_indicador, titulo)
+{
+    let form_registro = new FormData;
+    form_registro.append('id_indicador', id_indicador);
+    form_registro.append('action', 'grafico');
+    fetch(url_indicador_detalle, {
+            method: 'post',
+            body: form_registro
+
+        }).then(res => res.json())
+        .then(res => {
+            let etiquetas = [];
+            let metas = [];
+            let resultados = [];
+            let colores = [];
+            for (const i of res)
+            {
+                etiquetas.push(i.anio_detalle);
+                if (i.anio_detalle=='CODEFE')
+                {
+                    colores.push('rgb(254, 0, 19)');
+                }
+                else
+                {
+                    colores.push('rgb(0, 78, 144)');
+                    metas.push(i.meta_detalle);
+                }
+                    
+                
+                resultados.push(i.resultado_detalle);
+            }
+            /*CODIGO DEL GRÁFICO*/
+            let ctx = document.getElementById('chart_'+id_indicador).getContext('2d');
             let myChart = new Chart(ctx, {
                 data: {
                     labels: etiquetas,

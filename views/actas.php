@@ -34,6 +34,7 @@ $resultados = $rmodel->consulta();
             <table id="example1" class="display responsive nowrap table table-striped table-bordered" style="width:100%">
               <thead>
                 <tr>
+                  <th>ID</th>
                   <th>Secuencial</th>
                   <th>Equipo</th>
                   <th>Orden del día</th>
@@ -44,6 +45,7 @@ $resultados = $rmodel->consulta();
               </thead>
               <?php foreach ($resultados as $r) : ?>
                 <tr idcampo="<?php echo $r->id_acta; ?>">
+                <td class="text-center"><?php echo $r->id_acta; ?></td>  
                 <td class="text-center"><?php echo $r->secuencial_acta; ?></td>  
                 <td class="text-center"><?php echo $r->descripcion_equipo_trabajo; ?></td>
                   <td class="text-center"><?php echo $r->orden_acta; ?></td>

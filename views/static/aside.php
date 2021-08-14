@@ -45,8 +45,21 @@
           </a>
           <ul class="treeview-menu">
             <li class="<?php if(isset($active16)){echo $active16;}?>"><a href="reporte_tipo_proceso"><i class="fas fa-file-pdf"></i> <span>Reporte por tipo de proceso</span></a></li>
-            <!-- <li class="<?php if(isset($active14)){echo $active14;}?>"><a href="indicadores"><i class="fas fa-thumbtack"></i> <span>Indicadores</span></a></li>
-            <li class="<?php if(isset($active15)){echo $active15;}?>"><a href="actas"><i class="fas fa-file-signature"></i> <span>Actas de equipo</span></a></li> -->
+            <li class="<?php if(isset($active17)){echo $active17;}?>"><a href="inasistencia"><i class="fas fa-file-pdf"></i> <span>Inasistencia</span></a></li>
+            <li class="<?php if(isset($active18)){echo $active18;}?>"><a href="grafico_indicador"><i class="fas fa-chart-line"></i> <span>Gráficos de indicadores</span></a></li>
+          </ul>
+        </li>
+        <li class="treeview <?php if(isset($active19)||isset($active20)||isset($active21)){echo 'active';}?>">
+          <a href="#">
+          <i class="fas fa-shield-alt"></i> <span>Seguridad</span>
+          <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+          </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php if(isset($active19)){echo $active19;}?>"><a href="usuarios"><i class="fas fa-users"></i> <span>Usuarios</span></a></li>
+            <li class="<?php if(isset($active20)){echo $active20;}?>"><a href="roles"><i class="fas fa-briefcase"></i> <span>Roles</span></a></li>
+            <li class="<?php if(isset($active21)){echo $active21;}?>"><a href="permisos"><i class="fas fa-user-lock"></i> <span>Permisos</span></a></li>
           </ul>
         </li>
       </ul>
