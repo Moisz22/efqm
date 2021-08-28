@@ -39,7 +39,8 @@
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
       <!--ESTILO PARA MENSAJE DE NOTIFICACION-->
       <link rel="stylesheet" type="text/css" href="../dist/css/style.css">
-
+      <!--BOOTSTRAP TOGGLE-->
+      <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap-toggle/css/bootstrap-toggle.min.css">
 
     <style type="text/css">
       table.dataTable thead tr th {

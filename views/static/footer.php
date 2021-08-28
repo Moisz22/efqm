@@ -14,6 +14,8 @@
       <script src="../node_modules/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
       <!-- CHART JS -->
       <script src="../node_modules/chart.js/dist/chart.js"></script>
+      <!--BOOTSTRAP TOGGLE-->
+      <script src="../node_modules/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
       </body>
 
       </html>

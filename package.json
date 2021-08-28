@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^3.4.1",
+    "bootstrap-toggle": "^2.2.2",
     "chart.js": "^3.5.0",
     "datatables.net-bs": "^1.10.25",
     "datatables.net-dt": "^1.10.25",

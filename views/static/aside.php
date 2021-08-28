@@ -62,6 +62,7 @@
             <li class="<?php if(isset($active21)){echo $active21;}?>"><a href="permisos"><i class="fas fa-user-lock"></i> <span>Permisos</span></a></li>
           </ul>
         </li>
+        <li class="<?php if(isset($active22)){echo $active22;}?>"><a href="parametros"><i class="fas fa-sliders-h"></i> <span>Parámetros</span></a></li>
       </ul>
     </section>
   </aside>
