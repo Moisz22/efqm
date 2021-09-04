@@ -18,4 +18,12 @@ class UsuarioModel extends Model{
         $stm->execute();
         return $stm->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function consultaUsuario($id_usuario, $contrasena_actual)
+    {
+        $sql = 'SELECT * FROM '.$this->table.' WHERE id_usuario = :id_user AND password = :password';
+        $stm = $this->db->prepare($sql);
+        $stm->execute([':id_user'=>$id_usuario, ':password'=>$contrasena_actual]);
+        return $stm->fetchAll(PDO::FETCH_OBJ);
+    }
 }

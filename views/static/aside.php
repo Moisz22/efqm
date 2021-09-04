@@ -2,6 +2,7 @@
     <section class="sidebar">
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
+        <li class="<?php if(isset($active1)){echo $active1;}?>"><a href="dashboard"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
         <li class="treeview <?php if(isset($active2)||isset($active3)||isset($active4)||isset($active5)||isset($active6)||isset($active7)||isset($active8)||isset($active9)||isset($active10)||isset($active11)||isset($active12)){echo 'active';}?>">
           <a href="#">
           <i class="fas fa-wrench"></i> <span>Mantenimientos</span>

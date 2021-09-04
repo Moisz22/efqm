@@ -16,4 +16,13 @@ class PersonaModel extends Model{
         $stm->execute();
         return $stm->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function consultaPorId($id_persona)
+    {
+        $sql = 'select a.*, b.descripcion_cargo from ' . $this->table . ' as a
+                INNER JOIN cargo as b ON (a.id_cargo = b.id_cargo) WHERE a.estado_'.$this->table.' = 1 AND a.id_persona = '.$id_persona;
+        $stm = $this->db->prepare($sql);
+        $stm->execute();
+        return $stm->fetchAll(PDO::FETCH_OBJ);
+    }
 }

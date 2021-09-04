@@ -16,6 +16,8 @@
       <script src="../node_modules/chart.js/dist/chart.js"></script>
       <!--BOOTSTRAP TOGGLE-->
       <script src="../node_modules/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
+      <!--ZOOM IMAGE-->
+      <script src="../plugins/easyZoom/dist/easyzoom.js"></script>
       </body>
 
       </html>
