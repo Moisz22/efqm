@@ -4,6 +4,9 @@ $page = "Indicadores";
 include "static/head.php";
 include "static/header.php";
 include "static/aside.php";
+if ($permiso_14 == 0) {
+  echo '<script> location="dashboard"; </script>';
+}
 include '../models/IndicadorModel.php';
 include '../controllers/IndicadorController.php';
 $rmodel = new IndicadorModel;

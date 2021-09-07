@@ -4,6 +4,9 @@ $page = "Inasistencia";
 include "static/head.php";
 include "static/header.php";
 include "static/aside.php";
+if ($permiso_17 == 0) {
+  echo '<script> location="dashboard"; </script>';
+}
 ?>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->

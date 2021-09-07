@@ -4,6 +4,9 @@
   include "static/head.php"; 
   include "static/header.php";
   include "static/aside.php";
+  if ($permiso_7 == 0) {
+    echo '<script> location="dashboard"; </script>';
+  }
   include '../models/CriterioEfqmModel.php';
   include '../controllers/CriterioEfqmController.php';
   $rmodel = new CriterioEfqmModel;

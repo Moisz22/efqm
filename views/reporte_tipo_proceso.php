@@ -4,6 +4,9 @@ $page = "Reporte por tipo proceso";
 include "static/head.php";
 include "static/header.php";
 include "static/aside.php";
+if ($permiso_16 == 0) {
+  echo '<script> location="dashboard"; </script>';
+}
 include '../models/TipoProcesoModel.php';
 $rmodel = new TipoProcesoModel;
 $resultados = $rmodel->searchTable('tipo_proceso');

@@ -4,6 +4,9 @@
   include "static/head.php"; 
   include "static/header.php";
   include "static/aside.php";
+  if ($permiso_10 == 0) {
+    echo '<script> location="dashboard"; </script>';
+  }
   include '../models/LugarModel.php';
   include '../controllers/LugarController.php';
   $rmodel = new LugarModel;

@@ -4,6 +4,9 @@
   include "static/head.php"; 
   include "static/header.php";
   include "static/aside.php";
+  if ($permiso_4 == 0) {
+    echo '<script> location="dashboard"; </script>';
+  }
   include '../models/CargoModel.php';
   $rmodel = new CargoModel;
   $resultados = $rmodel->all();

@@ -22,12 +22,12 @@ class UsuarioController
 
     public function find()
     {
-        $this->personaModel->find($_POST['id_persona']);
+        $this->usuarioModel->find($_POST['id_usuario']);
     }
 
     public function actualizar()
     {
-        $this->usuarioModel->actualizar(['descripcion_usuario' => $_POST['descripcion']], $_POST['id_usuario']);
+        $this->usuarioModel->actualizar(['id_rol' => $_POST['id_rol'], 'equipo_usuario' => $_POST['equipo_trabajo']], $_POST['id_usuario']);
     }
 
     public function eliminar()

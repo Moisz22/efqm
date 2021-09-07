@@ -4,6 +4,9 @@
   include "static/head.php"; 
   include "static/header.php";
   include "static/aside.php";
+  if ($permiso_19 == 0) {
+    echo '<script> location="dashboard"; </script>';
+  }
   include '../models/UsuarioModel.php';
   $rmodel = new UsuarioModel;
   $resultados = $rmodel->consulta();

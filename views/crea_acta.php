@@ -4,6 +4,9 @@ $page = "Actas de equipos";
 include "static/head.php";
 include "static/header.php";
 include "static/aside.php";
+if ($permiso_15 == 0) {
+  echo '<script> location="dashboard"; </script>';
+}
 include '../models/ActaModel.php';
 include '../controllers/ActaController.php';
 $rmodel = new ActaModel;

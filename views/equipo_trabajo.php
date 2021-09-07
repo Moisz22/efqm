@@ -4,6 +4,9 @@
   include "static/head.php"; 
   include "static/header.php";
   include "static/aside.php";
+  if ($permiso_12 == 0) {
+    echo '<script> location="dashboard"; </script>';
+  }
   include '../models/EquipoTrabajoModel.php';
   $rmodel = new EquipoTrabajoModel;
   $resultados = $rmodel->all();

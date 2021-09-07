@@ -1,7 +1,2 @@
 ---------------------29/07/2021-------------------------------
 - APROBACION DE PROCESOS
-
---------------------01/08/2021------------------------------------
-
-- REVISAR TABLA USUARIOS (PERFIL_USUARIO NO ES LO MISMO QUE ID_ROL?????)
-- AGREGAR CAMPO ESTADO EN USUARIOS

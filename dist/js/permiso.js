@@ -43,16 +43,14 @@ function asignaPermiso(id_permiso) {
                 if (permiso==1)
                 {
                     opcion = 'asignado';
-                    mensaje = 'success';
                 }
                 else 
                 {
                     opcion = 'revocado';
-                    mensaje = 'error';
                 }
             
-                $.notification.show(mensaje, `${capitalize_label_permiso} ${opcion} correctamente!`);
+                $.notification.show('success', `${capitalize_label_permiso} ${opcion} correctamente!`);
             } else
-                $.notification.show(mensaje, `Error al asignar la ${label_permiso}!`);
+                $.notification.show('error', `Error al asignar el ${label_permiso}!`);
         })
 }

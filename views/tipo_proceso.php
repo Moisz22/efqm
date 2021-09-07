@@ -4,6 +4,9 @@
   include "static/head.php"; 
   include "static/header.php";
   include "static/aside.php";
+  if ($permiso_5 == 0) {
+    echo '<script> location="dashboard"; </script>';
+  }
   include '../models/TipoProcesoModel.php';
   $rmodel = new TipoProcesoModel;
   $resultados = $rmodel->all();

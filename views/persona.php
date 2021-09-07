@@ -4,6 +4,9 @@
   include "static/head.php"; 
   include "static/header.php";
   include "static/aside.php";
+  if ($permiso_11 == 0) {
+    echo '<script> location="dashboard"; </script>';
+  }
   include '../models/PersonaModel.php';
   include '../controllers/PersonaController.php';
   $rmodel = new PersonaModel;

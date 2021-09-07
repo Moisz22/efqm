@@ -4,6 +4,9 @@ $page = "Parámetros";
 include "static/head.php";
 include "static/header.php";
 include "static/aside.php";
+if ($permiso_22 == 0) {
+  echo '<script> location="dashboard"; </script>';
+}
 include '../models/UsuarioModel.php';
 include '../models/ParametroModel.php';
 $rmodel = new UsuarioModel;

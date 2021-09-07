@@ -258,6 +258,34 @@ function eliminar(id_proceso)
     }
 }
 
+function aprobar(id_proceso, id_usuario)
+{
+    let conf = confirm(`Desea aprobar este ${label}?`);
+    if (conf == true)
+    {
+        let form_registro = new FormData;
+        form_registro.append('id_proceso', id_proceso);
+        form_registro.append('id_usuario', id_usuario);
+        form_registro.append('action', 'aprobar');
+
+        fetch(url, {
+
+            method: 'post', 
+            body: form_registro
+
+        }).then( res => res.text())
+        .then( res => {  
+            if(res=='ok')
+            {
+                $.notification.show('success',`${capitalize_label} aprobado correctamente!`);
+                setTimeout('document.location.reload()',1000);
+            }
+            else
+                $.notification.show('error',`Error al aprobar el ${res}!`);
+        })
+    }
+}
+
 $("#modal-default").on('hidden.bs.modal', function () {
     document.getElementById('leyendaAgregar').style.display = 'block';
     document.getElementById('leyendaEditar').style.display = 'none';

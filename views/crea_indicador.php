@@ -4,6 +4,9 @@ $page = "Indicadores";
 include "static/head.php";
 include "static/header.php";
 include "static/aside.php";
+if ($permiso_14 == 0) {
+  echo '<script> location="dashboard"; </script>';
+}
 include '../models/ProcesoModel.php';
 include '../controllers/ActividadController.php';
 include '../controllers/ProcesoController.php';

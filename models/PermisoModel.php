@@ -15,4 +15,12 @@ class PermisoModel extends Model{
         $stm->execute([':value'=>$id_rol]);
         return $stm->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function consultaPermisoOpcion($id_rol, $id_opcion)
+    {
+        $sql = 'select * from '.$this->table.' WHERE id_rol = :value AND opcion_permiso = '.$id_opcion.' ORDER BY opcion_permiso';
+        $stm = $this->db->prepare($sql);
+        $stm->execute([':value'=>$id_rol]);
+        return $stm->fetchAll(PDO::FETCH_OBJ);
+    }
 }

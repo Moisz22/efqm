@@ -1,12 +1,15 @@
 <?php
-  $active3="active";
-  $page = "Versiones";
-  include "static/head.php"; 
-  include "static/header.php";
-  include "static/aside.php";
-  include '../models/VersionModel.php';
-  $rmodel = new VersionModel;
-  $resultados = $rmodel->all();
+$active3 = "active";
+$page = "Versiones";
+include "static/head.php";
+include "static/header.php";
+include "static/aside.php";
+if ($permiso_3 == 0) {
+  echo '<script> location="dashboard"; </script>';
+}
+include '../models/VersionModel.php';
+$rmodel = new VersionModel;
+$resultados = $rmodel->all();
 ?>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -38,16 +41,16 @@
                   <th>Opciones</th>
                 </tr>
               </thead>
-              <?php foreach($resultados as $r): ?>
-              <tr idcampo="<?php echo $r->id_version; ?>">
+              <?php foreach ($resultados as $r) : ?>
+                <tr idcampo="<?php echo $r->id_version; ?>">
                   <td class="text-center"><?php echo $r->id_version; ?></td>
                   <td class="text-center"><?php echo $r->descripcion_version; ?></td>
                   <td class="text-center">
                     <a class="btn btn-primary" onclick="getData(<?php echo $r->id_version; ?>)"><i class="fas fa-pencil-alt"></i></a>
                     <a class="btn btn-danger" onclick="eliminar(<?php echo $r->id_version; ?>)"><i class="fas fa-trash-alt"></i></a>
                   </td>
-              </tr>
-          <?php endforeach; ?>
+                </tr>
+              <?php endforeach; ?>
             </table>
           </div>
         </div>
@@ -56,18 +59,17 @@
   </section>
 </div>
 <?php
-  include 'static/footer.php';
-  ?>
+include 'static/footer.php';
+?>
 <?php
-  include 'components/modalVersion.php';
+include 'components/modalVersion.php';
 ?>
 <script type="text/javascript" src="../dist/js/version.js"></script>
 <script type="text/javascript" src="../dist/js/jquery.notification.js"></script>
 <script>
   $(document).ready(function() {
-      $('#example1').DataTable( {
-        "order": []
-      } );
-  } );
-  
+    $('#example1').DataTable({
+      "order": []
+    });
+  });
 </script>

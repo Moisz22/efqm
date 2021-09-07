@@ -4,6 +4,9 @@
   include "static/head.php"; 
   include "static/header.php";
   include "static/aside.php";
+  if ($permiso_9 == 0) {
+    echo '<script> location="dashboard"; </script>';
+  }
   include '../models/TipoDocumentoModel.php';
   include '../controllers/TipoDocumentoController.php';
   $rmodel = new TipoDocumentoModel;

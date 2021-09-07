@@ -1,13 +1,15 @@
 <?php
-
 require_once '../models/ProcesoModel.php';
+require_once '../models/AprobacionModel.php';
 
 class ProcesoController{
 
     private $procesoModel;
+    private $aprobacionModel;
 
     public function __construct () {
         $this->procesoModel = new ProcesoModel;
+        $this->aprobacionModel = new AprobacionModel;
     }
 
     public function guardarProceso()
@@ -44,6 +46,10 @@ class ProcesoController{
         $this->procesoModel->eliminar($_POST['id_proceso']);
     }
 
+    public function aprobar()
+    {
+        $this->aprobacionModel->guardar(['id_proceso' => $_POST['id_proceso'],'id_usuario' => $_POST['id_usuario'], 'fecha_aprobacion' => date('Y-m-d')]);
+    }
 }
 
 

@@ -12,7 +12,7 @@ class LoginModel extends Model{
     {  
         $sql = 'SELECT a.*, CONCAT(b.nombre_persona, " ", b.apellido_persona) as nombres FROM '.$this->table.' as a
         INNER JOIN persona as b ON (a.id_persona = b.id_persona)
-        WHERE a.username = :user AND a.password = :password';
+        WHERE a.username = :user AND a.password = :password AND estado_usuario = 1 AND acceso_usuario = 1';
         $stm = $this->db->prepare($sql);
         $stm->execute([':user'=>$usuario, ':password'=>$password]);
         return $stm->fetchAll(PDO::FETCH_OBJ);

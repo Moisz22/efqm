@@ -1,12 +1,15 @@
 <?php
-  $active2="active";
-  $page = "Recursos";
-  include "static/head.php"; 
-  include "static/header.php";
-  include "static/aside.php";
-  include '../models/RecursoModel.php';
-  $rmodel = new RecursoModel;
-  $resultados = $rmodel->all();
+$active2 = "active";
+$page = "Recursos";
+include "static/head.php";
+include "static/header.php";
+include "static/aside.php";
+if ($permiso_2 == 0) {
+  echo '<script> location="dashboard"; </script>';
+}
+include '../models/RecursoModel.php';
+$rmodel = new RecursoModel;
+$resultados = $rmodel->all();
 ?>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -38,16 +41,16 @@
                   <th>Opciones</th>
                 </tr>
               </thead>
-              <?php foreach($resultados as $r): ?>
-              <tr idcampo="<?php echo $r->id_recurso; ?>">
+              <?php foreach ($resultados as $r) : ?>
+                <tr idcampo="<?php echo $r->id_recurso; ?>">
                   <td class="text-center"><?php echo $r->id_recurso; ?></td>
                   <td class="text-center"><?php echo $r->descripcion_recurso; ?></td>
                   <td class="text-center">
                     <a class="btn btn-primary" onclick="getData(<?php echo $r->id_recurso; ?>)"><i class="fas fa-pencil-alt"></i></a>
                     <a class="btn btn-danger" onclick="eliminar(<?php echo $r->id_recurso; ?>)"><i class="fas fa-trash-alt"></i></a>
                   </td>
-              </tr>
-          <?php endforeach; ?>
+                </tr>
+              <?php endforeach; ?>
             </table>
           </div>
         </div>
@@ -56,16 +59,15 @@
   </section>
 </div>
 <?php
-  include 'static/footer.php';
-  ?>
+include 'static/footer.php';
+?>
 <?php
-  include 'components/modalRecurso.php';
-  ?>
+include 'components/modalRecurso.php';
+?>
 <script type="text/javascript" src="../dist/js/recurso.js"></script>
 <script type="text/javascript" src="../dist/js/jquery.notification.js"></script>
 <script>
   $(document).ready(function() {
     $('table.display').DataTable();
-  } );
-  
+  });
 </script>

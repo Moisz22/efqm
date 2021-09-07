@@ -13,7 +13,7 @@
          <div class="modal-body" id="modal_add_body">
             <div class="form-medium">
                <div class="form-group">
-               <input type="hidden" id="id_anexo_proceso_update">
+               <input type="hidden" id="id_usuario_update">
                   <label>Persona:</label>
                   <select class="form-control" id="id_persona" name="id_persona" required title="Persona" onchange="asignaUsuario(this.value)">
                             <option value="">Seleccione...</option>

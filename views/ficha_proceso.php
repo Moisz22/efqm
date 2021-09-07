@@ -467,7 +467,7 @@ $pdf->SetFillColor(255, 255, 255);
 $pdf->SetTextColor(0);
 $pdf->SetDrawColor(0, 0, 0);
 $pdf->SetFont('Arial', '', 10);
-if ($responsables != false) {
+if ($indicadores != false) {
     foreach ($indicadores as $rowin) :
         $dato_indicador = $indicadorModel->consultaIdicadorFichaProceso($rowin['id_indicador']);
         $pdf->Row(array(utf8_decode($dato_indicador[0]->descripcion_indicador), utf8_decode($dato_indicador[0]->formula_indicador), $dato_indicador[0]->meta_indicador, $dato_indicador[0]->descripcion_frecuencia));
