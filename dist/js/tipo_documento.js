@@ -90,7 +90,7 @@ function actualizar()
 
 function eliminar(id_tipo_documento)
 {
-    let conf = confirm(`Desea eliminar este ${label}`);
+    let conf = confirm(`Desea eliminar este ${label}?`);
     if (conf == true)
     {
         let form_registro = new FormData;

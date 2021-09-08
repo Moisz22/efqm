@@ -3,3 +3,4 @@
 /storage/anexo_proceso/
 /node_modules
 .phpunit.result.cache
+/dist/img

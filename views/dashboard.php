@@ -16,7 +16,7 @@ include "static/aside.php";
   </section>
   <section class="content container-fluid">
     <div class="row">
-      <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="col-md-4 col-sm-6 col-xs-12">
         <a href="filosofia" style="color: black;">
           <div class="info-box">
             <span class="info-box-icon bg-blue"><i class="fas fa-hands-helping"></i></span>
@@ -28,7 +28,7 @@ include "static/aside.php";
           </div>
         </a>
       </div>
-      <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="col-md-4 col-sm-6 col-xs-12">
         <a href="organigrama.php" style="color: black;">
           <div class="info-box">
             <span class="info-box-icon bg-green"><i class="fas fa-sitemap"></i></span>
@@ -40,19 +40,7 @@ include "static/aside.php";
           </div>
         </a>
       </div>
-      <div class="col-md-3 col-sm-6 col-xs-12">
-        <a href="mapa_proceso_2.php" style="color: black;">
-          <div class="info-box">
-            <span class="info-box-icon bg-aqua"><i class="fas fa-project-diagram"></i></span>
-            <div class="info-box-content">
-              <span class="info-box-text">
-                <h4><b>Mapa de procesos</b></h4>
-              </span>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="col-md-4 col-sm-6 col-xs-12">
         <a href="grafico_indicador" style="color: black;">
           <div class="info-box">
             <span class="info-box-icon bg-yellow"><i class="fas fa-thumbtack"></i></span>

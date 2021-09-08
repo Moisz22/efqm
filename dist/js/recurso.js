@@ -85,7 +85,7 @@ function actualizar()
 
 function eliminar(id_recurso)
 {
-    let conf = confirm(`Desea eliminar este ${label}`);
+    let conf = confirm(`¿Desea eliminar este ${label}?`);
     if (conf == true)
     {
         let form_registro = new FormData;

@@ -22,7 +22,7 @@ class UsuarioController
 
     public function find()
     {
-        $this->usuarioModel->find($_POST['id_usuario']);
+        $this->personaModel->find($_POST['id_persona']);
     }
 
     public function actualizar()

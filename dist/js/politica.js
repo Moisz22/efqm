@@ -146,6 +146,7 @@ $(modal_politica).on('hidden.bs.modal', function () {
     document.getElementById('leyendaEditarPolitica').style.display = 'none';
     document.getElementById('buttonGuardarPolitica').style.display = 'block';
     document.getElementById('buttonActualizarPolitica').style.display = 'none';
+    $("#orden_politica").val('');
     $("#id_politica_update").val('');
     $("#id_actividad_politica").val('');
     $("#descripcion_politica").val('');
