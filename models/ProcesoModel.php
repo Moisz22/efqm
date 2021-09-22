@@ -115,4 +115,17 @@ class ProcesoModel extends Model
         $stm->execute([':value'=>$id_tipo_proceso]);
         return $stm->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function datosAprobacion($id_proceso)
+    {
+        $sql = 'SELECT d.descripcion_cargo, a.fecha_aprobacion
+        FROM `proceso_aprobacion` as a
+        INNER JOIN usuario as b ON (a.id_usuario = b.id_usuario)
+        INNER JOIN persona as c ON (b.id_persona = c.id_persona)
+        INNER JOIN cargo as d ON (c.id_cargo = d.id_cargo)
+        WHERE a.id_proceso = :value';
+        $stm = $this->db->prepare($sql);
+        $stm->execute([':value'=>$id_proceso]);
+        return $stm->fetchAll(PDO::FETCH_OBJ);
+    }
 }

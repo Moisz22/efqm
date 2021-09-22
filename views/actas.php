@@ -76,7 +76,10 @@ include 'static/footer.php';
 <script>
   $(document).ready(function() {
     $('#example1').DataTable({
-      "order": []
+      "order": [],
+      "language": {
+                    "url": "../spanish.json"
+                }
     });
   });
 </script>

@@ -1,5 +1,5 @@
 <?php
-require '../plugins/fpdf183/fpdf.php';
+require '../plugins/fpdf/fpdf.php';
 include '../models/ProcesoModel.php';
 include '../models/PoliticaModel.php';
 include '../models/ActividadModel.php';
@@ -36,6 +36,18 @@ if (isset($_GET['id'])) {
     $versiones = $controlCambioModel->consulta($id);
     $recursos = $recursoProcesoModel->consulta($id);
     $indicadores = $rmodel->selected('proceso_indicador', 'id_proceso', $id);
+    $datosAprobacion = $rmodel->datosAprobacion($id);
+    if(!empty($datosAprobacion))
+    {
+        $aprobadoPor = $datosAprobacion[0]->descripcion_cargo;
+        $fechaAprobacion = date('d/m/Y', strtotime($datosAprobacion[0]->fecha_aprobacion));
+    }
+    else
+    {
+        $aprobadoPor = '';
+        $fechaAprobacion = '';
+    }
+    
 }
 class PDF extends FPDF
 {
@@ -222,10 +234,10 @@ class PDF extends FPDF
         $this->ln();
         $this->SetXY(147, 20);
         $this->Cell(53, 5, utf8_decode("Versión: ") . $GLOBALS['version'], 1, 1, 'C');
-        $header = array("Elaborado por: " . $GLOBALS['propietario'], "Aprobado por: " . 'Aprobado_var');
+        $header = array("Elaborado por: " . $GLOBALS['propietario'], "Aprobado por: " . $GLOBALS['aprobadoPor']);
         $data1 = [];
         $this->OneTable1($header, $data1, 25, 219);
-        $header = array("Fecha de elaboración: " . date('d/m/Y', strtotime($GLOBALS['fecha_elaboracion'])), "Fecha de aprobación: " . date('d/m/Y', strtotime('2021-08-20')));
+        $header = array("Fecha de elaboración: " . date('d/m/Y', strtotime($GLOBALS['fecha_elaboracion'])), "Fecha de aprobación: " . $GLOBALS['fechaAprobacion']);
         $data1 = [];
         $this->OneTable1($header, $data1, 25, 219);
         $this->ln();

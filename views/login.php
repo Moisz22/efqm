@@ -31,7 +31,7 @@ $page = "Login";
         <div class="col-xs-8">
         </div>
         <div class="col-xs-4">
-          &nbsp;&nbsp;&nbsp;&nbsp;<input type="button" onclick="login()" class="btn btn-primary" name="login" value="Ingresar">
+          &nbsp;&nbsp;&nbsp;&nbsp;<input type="button" onclick="login()" class="btn btn-primary" id="btnLogin" name="login" value="Ingresar">
         </div>
       </div>
     </div>

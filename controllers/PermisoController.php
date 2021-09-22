@@ -24,7 +24,7 @@ class PermisoController
         </thead>
         <tbody>';
         $result = $this->permisoModel->consulta($_POST['id_rol']);
-        $opciones = ['', 'Dashboard', 'Recursos', 'Versión', 'Cargos', 'Tipos de proceso', 'Frecuencia', 'Criterio EFQM', 'Categoria indicador', 'Tipo de documento', 'Lugares', 'Personas', 'Equipos de trabajo', 'Procesos', 'Indicadores', 'Actas de equipo', 'Reporte por tipo de proceso', 'Inasistencia', 'Gráficos de indicadores', 'Usuarios', 'Roles', 'Permisos', 'Parámetros'];
+        $opciones = ['', 'Dashboard', 'Recursos', 'Versión', 'Cargos', 'Tipos de proceso', 'Frecuencia', 'Criterio EFQM', 'Categoria indicador', 'Tipo de documento', 'Lugares', 'Personas', 'Equipos de trabajo', 'Procesos', 'Indicadores', 'Actas de equipo', 'Reporte por tipo de proceso', 'Inasistencia', 'Gráficos de indicadores', 'Usuarios', 'Roles', 'Permisos', 'Parámetros', 'Aprobación de ficha de procesos'];
         foreach ($result as $r) {
             $checked = ($r->flag_permiso == 1) ? 'checked' : '';
             $data .= '<tr>

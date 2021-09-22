@@ -1,5 +1,5 @@
 <?php
-require '../plugins/fpdf183/fpdf.php';
+require '../plugins/fpdf/fpdf.php';
 include '../models/ActaModel.php';
 
 $actaModel = new ActaModel();

@@ -89,10 +89,3 @@ include 'components/modalCargo.php';
 ?>
 <script type="text/javascript" src="../dist/js/indicador_detalle.js"></script>
 <script type="text/javascript" src="../dist/js/jquery.notification.js"></script>
-<script>
-  $(document).ready(function() {
-    $('#example1').DataTable({
-      "order": []
-    });
-  });
-</script>

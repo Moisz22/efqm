@@ -68,9 +68,11 @@
 <script type="text/javascript" src="../dist/js/jquery.notification.js"></script>
 <script>
   $(document).ready(function() {
-      $('#example1').DataTable( {
-        "order": []
-      } );
-  } );
-  
+    $('#example1').DataTable({
+      "order": [],
+      "language": {
+                    "url": "../spanish.json"
+                }
+    });
+  });
 </script>

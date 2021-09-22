@@ -60,9 +60,11 @@ $resultados = $rmodel->consulta();
                   <td class="text-center"><?php echo $estado_aprobacion; ?></td>
                   <td class="text-center">
                     <?php
-                    if (empty($datoAprobacion)) { ?>
-                      <a class="btn btn-success" onclick="aprobar(<?php echo $r->id_proceso . ', ' . $_SESSION['id_usuario']; ?>)"><i class="fas fa-check"></i></a>
+                    if ($permiso_23 == 1) {
+                      if (empty($datoAprobacion)) { ?>
+                        <a class="btn btn-success" onclick="aprobar(<?php echo $r->id_proceso . ', ' . $_SESSION['id_usuario']; ?>)"><i class="fas fa-check"></i></a>
                     <?php  }
+                    }
                     ?>
                     <a class="btn btn-warning" target="_blank" href="ficha_proceso?id=<?php echo base64_encode($r->id_proceso); ?>"><i class="far fa-file-pdf"></i></a>
                     <a class="btn btn-primary" href="crea_proceso?id=<?php echo base64_encode($r->id_proceso); ?>"><i class="fas fa-pencil-alt"></i></a>
@@ -89,8 +91,12 @@ include 'static/footer.php';
 <script type="text/javascript" src="../dist/js/jquery.notification.js"></script>
 <script>
   $(document).ready(function() {
-    $('#example1').DataTable({
-      "order": []
-    });
-  });
+      $('#example1').DataTable( {
+        "order": [],
+        "language": {
+                    "url": "../spanish.json"
+                }
+      } );
+  } );
+  
 </script>
